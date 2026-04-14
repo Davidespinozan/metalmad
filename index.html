@@ -4,949 +4,295 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARQEN — Architectural Objects</title>
-<meta name="description" content="Objetos de diseño en acero. Macetas retroiluminadas y puertas autoinstalables. Envíos a todo México y Estados Unidos.">
+<meta name="description" content="Objetos de diseño en acero. Macetas retroiluminadas y puertas autoinstalables. Envíos a México, USA e internacional.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:     #0E0E0C;
-  --ink-2:   #1C1C1A;
-  --bg:      #F5F4F1;
-  --bg-2:    #EDECEA;
-  --white:   #FFFFFF;
-  --mid:     #68685E;
-  --light:   #9A9A90;
-  --gold:    #C4A96A;
-  --gold-2:  #A8893E;
-
-  --text-xs:   0.64rem;
-  --text-sm:   0.78rem;
-  --text-base: 0.9rem;
-  --text-md:   1rem;
-  --text-lg:   1.3rem;
-  --text-xl:   1.8rem;
-  --text-2xl:  2.6rem;
-  --text-hero: clamp(3rem, 5.5vw, 5rem);
-
-  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
-  --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px;
-  --sp-9:80px; --sp-10:96px; --sp-11:128px;
-
-  --max-w: 1200px;
-  --gutter: 64px;
-  --nav-h: 64px;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --radius: 16px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.05), 0 8px 32px rgba(0,0,0,0.08);
-  --shadow-h: 0 4px 16px rgba(0,0,0,0.08), 0 20px 48px rgba(0,0,0,0.13);
-  --ease: cubic-bezier(.16,1,.3,1);
+:root{
+  --ink:#0E0E0C; --ink-2:#1C1C1A; --bg:#F5F4F1; --bg-2:#EDECEA;
+  --white:#FFFFFF; --mid:#68685E; --light:#9A9A90;
+  --gold:#C4A96A; --gold-2:#A8893E;
+  --text-xs:.64rem; --text-sm:.78rem; --text-base:.9rem;
+  --text-md:1rem; --text-lg:1.3rem; --text-xl:1.8rem;
+  --text-hero:clamp(3rem,5.5vw,5rem);
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;
+  --sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:80px;--sp-10:96px;--sp-11:128px;
+  --max-w:1200px;--gutter:64px;--nav-h:64px;
+  --font-d:'Cormorant Garamond',Georgia,serif;
+  --radius:16px;
+  --shadow:0 2px 8px rgba(0,0,0,.05),0 8px 32px rgba(0,0,0,.08);
+  --shadow-h:0 4px 16px rgba(0,0,0,.08),0 20px 48px rgba(0,0,0,.13);
+  --ease:cubic-bezier(.16,1,.3,1);
 }
-
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 ::selection{background:var(--ink);color:var(--bg);}
-body{
-  font-family:'Montserrat',sans-serif;
-  font-size:var(--text-base);
-  color:var(--ink);
-  background:var(--bg);
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
+body{font-family:'Montserrat',sans-serif;font-size:var(--text-base);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 img{display:block;max-width:100%;}
 a{text-decoration:none;color:inherit;}
 button{font-family:inherit;cursor:pointer;border:none;background:none;}
 
-
-/* ── LANG SWITCHER ── */
-.lang-btn {
-  font-size:10px; font-weight:700; letter-spacing:0.14em;
-  padding:6px 12px; border-radius:6px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  color:rgba(255,255,255,0.55);
-  cursor:pointer; transition:all 0.2s;
-  font-family:'Montserrat',sans-serif;
-  margin-left:var(--sp-2);
-}
-.lang-btn:hover { background:rgba(255,255,255,0.14); color:white; }
-
-/* ── ANNOUNCE ── */
-.ann{
-  background:var(--ink);
-  padding:9px 0;
-  overflow:hidden;
-}
-.ann-track{
-  display:inline-flex;
-  animation:ann 36s linear infinite;
-  white-space:nowrap;
-}
+/* ANNOUNCE */
+.ann{background:var(--ink);padding:9px 0;overflow:hidden;}
+.ann-track{display:inline-flex;animation:ann 36s linear infinite;white-space:nowrap;}
 @keyframes ann{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ann-item{
-  padding:0 var(--sp-8);
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.3em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.32);
-  display:flex;
-  align-items:center;
-  gap:var(--sp-8);
-}
-.ann-item::after{content:'·';opacity:0.3;font-size:1.2em;}
+.ann-item{padding:0 var(--sp-8);font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.32);display:flex;align-items:center;gap:var(--sp-8);}
+.ann-item::after{content:'·';opacity:.3;font-size:1.2em;}
 
-/* ── NAV ── */
-.nav{
-  position:sticky;
-  top:0;
-  z-index:200;
-  height:var(--nav-h);
-  background:rgba(14,14,12,0.96);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,255,255,0.07);
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  padding:0 var(--gutter);
-}
-.nav-logo{
-  font-family:var(--font-display);
-  font-size:1.4rem;
-  font-weight:700;
-  letter-spacing:0.08em;
-  color:white;
-  display:flex;
-  flex-direction:column;
-  line-height:1;
-}
-.nav-logo span{
-  font-size:8px;
-  font-family:'Montserrat',sans-serif;
-  font-weight:600;
-  letter-spacing:0.3em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-top:3px;
-}
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:var(--sp-7);
-}
-.nav-link{
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.4);
-  transition:color 0.2s;
-  position:relative;
-  padding-bottom:2px;
-}
-.nav-link::after{
-  content:'';
-  position:absolute;
-  bottom:0;left:0;right:0;
-  height:1px;
-  background:var(--gold);
-  transform:scaleX(0);
-  transform-origin:right;
-  transition:transform 0.28s var(--ease);
-}
+/* NAV */
+.nav{position:sticky;top:0;z-index:200;height:var(--nav-h);background:rgba(14,14,12,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--gutter);}
+.nav-logo{font-family:var(--font-d);font-size:1.4rem;font-weight:700;letter-spacing:.08em;color:white;display:flex;flex-direction:column;line-height:1;}
+.nav-logo span{font-size:8px;font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:3px;}
+.nav-links{display:flex;align-items:center;gap:var(--sp-7);}
+.nav-link{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s;position:relative;padding-bottom:2px;}
+.nav-link::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .28s var(--ease);}
 .nav-link:hover{color:white;}
 .nav-link:hover::after{transform:scaleX(1);transform-origin:left;}
-.nav-actions{
-  display:flex;
-  align-items:center;
-  gap:var(--sp-3);
-  justify-content:flex-end;
-}
-.nav-cart{
-  display:flex;
-  align-items:center;
-  gap:var(--sp-2);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.45);
-  padding:7px 16px;
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:8px;
-  transition:all 0.2s;
-}
-.nav-cart:hover{color:white;border-color:rgba(255,255,255,0.4);}
-.cart-badge{
-  background:var(--gold);
-  color:var(--ink);
-  font-size:9px;
-  font-weight:800;
-  min-width:17px;height:17px;
-  border-radius:999px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:0 4px;
-}
-.btn-nav{
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  padding:9px 22px;
-  border-radius:8px;
-  background:var(--gold);
-  color:var(--ink);
-  transition:all 0.2s;
-  display:none;
-}
+.nav-actions{display:flex;align-items:center;gap:var(--sp-3);justify-content:flex-end;}
+.nav-cart{display:flex;align-items:center;gap:var(--sp-2);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:7px 16px;border:1px solid rgba(255,255,255,.15);border-radius:8px;transition:all .2s;}
+.nav-cart:hover{color:white;border-color:rgba(255,255,255,.4);}
+.cart-badge{background:var(--gold);color:var(--ink);font-size:9px;font-weight:800;min-width:17px;height:17px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px;}
+.btn-nav{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;border-radius:8px;background:var(--gold);color:var(--ink);transition:all .2s;}
 .btn-nav:hover{background:var(--gold-2);transform:translateY(-1px);}
-@media(min-width:900px){.btn-nav{display:inline-flex;}}
-.nav-ham{
-  display:none;
-  flex-direction:column;
-  gap:4px;
-  padding:4px;
-  margin-left:var(--sp-3);
-}
-.nav-ham span{
-  display:block;width:20px;height:1.5px;
-  background:rgba(255,255,255,0.6);
-  border-radius:2px;
-  transition:all 0.3s var(--ease);
-}
+.lang-btn{font-size:10px;font-weight:700;letter-spacing:.14em;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.55);cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;}
+.lang-btn:hover{background:rgba(255,255,255,.14);color:white;}
+.nav-ham{display:none;flex-direction:column;gap:4px;padding:4px;}
+.nav-ham span{display:block;width:20px;height:1.5px;background:rgba(255,255,255,.6);border-radius:2px;transition:all .3s var(--ease);}
 
-/* ── HERO ── */
-.hero{
-  position:relative;
-  height:calc(100vh - var(--nav-h));
-  min-height:560px;
-  max-height:960px;
-  overflow:hidden;
-  background:var(--ink);
-  display:flex;
-  align-items:flex-end;
-}
-.hero-img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  object-position:center 40%;
-  transition:transform 14s ease;
-}
+/* HERO */
+.hero{position:relative;height:calc(100vh - var(--nav-h));min-height:560px;max-height:960px;overflow:hidden;background:var(--ink);display:flex;align-items:flex-end;}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform 14s ease;}
 .hero:hover .hero-img{transform:scale(1.03);}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:
-    linear-gradient(to right, rgba(8,8,6,0.9) 0%, rgba(8,8,6,0.55) 42%, rgba(8,8,6,0.1) 70%, transparent 100%),
-    linear-gradient(to top, rgba(8,8,6,0.6) 0%, transparent 55%);
-}
-.hero-body{
-  position:relative;z-index:2;
-  padding:0 var(--gutter) var(--sp-10);
-  max-width:calc(var(--max-w) + var(--gutter)*2);
-  margin:0 auto;width:100%;
-}
-.hero-tag{
-  display:inline-flex;
-  align-items:center;
-  gap:var(--sp-2);
-  background:rgba(196,169,106,0.12);
-  border:1px solid rgba(196,169,106,0.25);
-  padding:6px 16px;
-  border-radius:999px;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:var(--sp-5);
-  opacity:0;
-  animation:rise 0.6s var(--ease) 0.1s both;
-}
-.hero-tag::before{
-  content:'';
-  width:5px;height:5px;
-  border-radius:50%;
-  background:var(--gold);
-  flex-shrink:0;
-}
-@keyframes rise{
-  from{opacity:0;transform:translateY(16px);}
-  to{opacity:1;transform:none;}
-}
-.hero-h1{
-  font-size:var(--text-hero);
-  font-family:var(--font-display);
-  font-weight:600;
-  line-height:1.02;
-  letter-spacing:-0.01em;
-  color:white;
-  margin-bottom:var(--sp-5);
-  max-width:580px;
-  opacity:0;
-  animation:rise 0.9s var(--ease) 0.22s both;
-}
-.hero-h1 em{
-  font-style:italic;
-  color:var(--gold);
-  font-weight:500;
-}
-.hero-sub{
-  font-size:var(--text-sm);
-  line-height:1.85;
-  color:rgba(255,255,255,0.38);
-  max-width:380px;
-  margin-bottom:var(--sp-7);
-  opacity:0;
-  animation:rise 0.9s var(--ease) 0.34s both;
-}
-.hero-btns{
-  display:flex;
-  gap:var(--sp-3);
-  margin-bottom:var(--sp-8);
-  opacity:0;
-  animation:rise 0.9s var(--ease) 0.46s both;
-}
-.btn-hero{
-  padding:14px 34px;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  border-radius:999px;
-  transition:all 0.25s var(--ease);
-  display:inline-flex;
-  align-items:center;
-  gap:var(--sp-2);
-}
-.btn-hero-gold{
-  background:var(--gold);
-  color:var(--ink);
-}
-.btn-hero-gold:hover{
-  background:var(--gold-2);
-  transform:translateY(-2px);
-  box-shadow:0 8px 32px rgba(196,169,106,0.3);
-}
-.btn-hero-ghost{
-  border:1.5px solid rgba(255,255,255,0.22);
-  color:rgba(255,255,255,0.65);
-}
-.btn-hero-ghost:hover{
-  border-color:rgba(255,255,255,0.5);
-  color:white;
-}
-.hero-markers{
-  display:flex;
-  gap:var(--sp-8);
-  opacity:0;
-  animation:rise 0.9s var(--ease) 0.58s both;
-}
-.hero-marker{
-  padding-left:var(--sp-4);
-  border-left:1px solid rgba(255,255,255,0.1);
-}
-.hero-marker-val{
-  font-size:10px;
-  font-weight:700;
-  color:rgba(255,255,255,0.5);
-  letter-spacing:0.08em;
-  display:block;
-  margin-bottom:2px;
-}
-.hero-marker-label{
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.2);
-}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,6,.9) 0%,rgba(8,8,6,.55) 42%,rgba(8,8,6,.1) 70%,transparent 100%),linear-gradient(to top,rgba(8,8,6,.6) 0%,transparent 55%);}
+.hero-body{position:relative;z-index:2;padding:0 var(--gutter) var(--sp-10);max-width:calc(var(--max-w) + var(--gutter)*2);margin:0 auto;width:100%;}
+.hero-tag{display:inline-flex;align-items:center;gap:var(--sp-2);background:rgba(196,169,106,.12);border:1px solid rgba(196,169,106,.25);padding:6px 16px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-5);opacity:0;animation:rise .6s var(--ease) .1s both;}
+.hero-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+@keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.hero-h1{font-size:var(--text-hero);font-family:var(--font-d);font-weight:600;line-height:1.02;letter-spacing:-.01em;color:white;margin-bottom:var(--sp-5);max-width:580px;opacity:0;animation:rise .9s var(--ease) .22s both;}
+.hero-h1 em{font-style:italic;color:var(--gold);font-weight:500;}
+.hero-sub{font-size:var(--text-sm);line-height:1.85;color:rgba(255,255,255,.38);max-width:380px;margin-bottom:var(--sp-7);opacity:0;animation:rise .9s var(--ease) .34s both;}
+.hero-btns{display:flex;gap:var(--sp-3);margin-bottom:var(--sp-8);opacity:0;animation:rise .9s var(--ease) .46s both;}
+.btn-hero{padding:14px 34px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;transition:all .25s var(--ease);display:inline-flex;align-items:center;gap:var(--sp-2);}
+.btn-hero-gold{background:var(--gold);color:var(--ink);}
+.btn-hero-gold:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(196,169,106,.3);}
+.btn-hero-ghost{border:1.5px solid rgba(255,255,255,.22);color:rgba(255,255,255,.65);}
+.btn-hero-ghost:hover{border-color:rgba(255,255,255,.5);color:white;}
+.hero-markers{display:flex;gap:var(--sp-8);opacity:0;animation:rise .9s var(--ease) .58s both;}
+.hero-marker{padding-left:var(--sp-4);border-left:1px solid rgba(255,255,255,.1);}
+.hero-marker-val{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;display:block;margin-bottom:2px;}
+.hero-marker-label{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);}
 
-/* ── WRAP ── */
+/* UTILS */
 .wrap{max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter);}
-
-/* ── SECTION HEADERS ── */
-.eyebrow{
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.26em;
-  text-transform:uppercase;
-  color:var(--light);
-  display:inline-flex;
-  align-items:center;
-  gap:var(--sp-3);
-  margin-bottom:var(--sp-3);
-}
-.eyebrow::before{
-  content:'';
-  display:block;
-  width:18px;height:1px;
-  background:currentColor;
-  flex-shrink:0;
-}
-.eyebrow-gold{color:var(--gold);}
-.eyebrow-light{color:rgba(255,255,255,0.25);}
-.eyebrow-light::before{background:rgba(255,255,255,0.25);}
-.sec-title{
-  font-size:clamp(2rem,3vw,2.8rem);
-  font-family:var(--font-display);
-  font-weight:700;
-  letter-spacing:-0.01em;
-  line-height:1.08;
-  color:var(--ink);
-}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--light);display:inline-flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-3);}
+.eyebrow::before{content:'';display:block;width:18px;height:1px;background:currentColor;flex-shrink:0;}
+.eyebrow-light{color:rgba(255,255,255,.25);}
+.eyebrow-light::before{background:rgba(255,255,255,.25);}
+.sec-title{font-size:clamp(2rem,3vw,2.8rem);font-family:var(--font-d);font-weight:700;letter-spacing:-.01em;line-height:1.08;color:var(--ink);}
 .sec-title em{font-style:italic;color:var(--mid);font-weight:500;}
 .sec-title-light{color:white;}
-.sec-title-light em{color:rgba(255,255,255,0.3);}
-.sec-desc{
-  font-size:var(--text-sm);
-  line-height:1.9;
-  color:var(--mid);
-  max-width:460px;
-  margin-top:var(--sp-3);
-}
-
-/* ── BUTTONS ── */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
-  font-family:'Montserrat',sans-serif;
-  font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  padding:12px 28px;border-radius:999px;
-  border:none;cursor:pointer;
-  transition:all 0.2s var(--ease);
-  white-space:nowrap;
-}
-.btn:active{transform:scale(0.97);}
+.sec-title-light em{color:rgba(255,255,255,.3);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px 28px;border-radius:999px;border:none;cursor:pointer;transition:all .2s var(--ease);white-space:nowrap;}
+.btn:active{transform:scale(.97);}
 .btn-dark{background:var(--ink);color:white;}
-.btn-dark:hover{background:var(--ink-2);transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+.btn-dark:hover{background:var(--ink-2);transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.2);}
 .btn-gold{background:var(--gold);color:var(--ink);}
-.btn-gold:hover{background:var(--gold-2);transform:translateY(-1px);box-shadow:0 8px 20px rgba(196,169,106,0.3);}
-.btn-outline{border:1.5px solid rgba(0,0,0,0.14);color:var(--mid);background:transparent;}
-.btn-outline:hover{border-color:var(--ink);color:var(--ink);}
-.btn-wa{background:#16a34a;color:white;box-shadow:0 4px 14px rgba(22,163,74,0.2);}
-.btn-wa:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 8px 24px rgba(22,163,74,0.28);}
-.btn-ghost-light{border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);background:transparent;}
-.btn-ghost-light:hover{border-color:rgba(255,255,255,0.45);color:white;}
+.btn-gold:hover{background:var(--gold-2);transform:translateY(-1px);box-shadow:0 8px 20px rgba(196,169,106,.3);}
+.btn-ghost-light{border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);background:transparent;}
+.btn-ghost-light:hover{border-color:rgba(255,255,255,.45);color:white;}
 
-/* ── PRODUCTS ── */
-.sec-products{
-  background:var(--bg);
-  padding:var(--sp-11) 0 var(--sp-10);
-}
-.products-hero{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:var(--sp-6);
-  margin-top:var(--sp-8);
-}
-.ph-card{
-  background:white;
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  cursor:pointer;
-  transition:transform 0.4s var(--ease),box-shadow 0.4s;
-  display:flex;flex-direction:column;
-}
+/* PRODUCTS */
+.sec-products{background:var(--bg);padding:var(--sp-11) 0 var(--sp-10);}
+.products-hero{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);margin-top:var(--sp-8);}
+.ph-card{background:white;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .4s var(--ease),box-shadow .4s;display:flex;flex-direction:column;}
 .ph-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-h);}
-.ph-img{
-  height:360px;
-  overflow:hidden;
-  background:var(--bg-2);
-  position:relative;
-  flex-shrink:0;
-}
-.ph-img img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform 0.9s var(--ease);
-}
+.ph-img{height:360px;overflow:hidden;background:var(--bg-2);position:relative;flex-shrink:0;}
+.ph-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease);}
 .ph-card:hover .ph-img img{transform:scale(1.05);}
-.ph-badge{
-  position:absolute;top:var(--sp-4);left:var(--sp-4);
-  background:var(--ink);color:white;
-  font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  padding:5px 14px;border-radius:999px;
-}
-.ph-body{
-  padding:var(--sp-6) var(--sp-6) var(--sp-7);
-  flex:1;display:flex;flex-direction:column;
-}
-.ph-cat{
-  font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:var(--sp-2);
-}
-.ph-name{
-  font-size:var(--text-xl);
-  font-family:var(--font-display);
-  font-weight:700;color:var(--ink);
-  margin-bottom:var(--sp-3);line-height:1.1;
-  letter-spacing:-0.01em;
-}
-.ph-desc{
-  font-size:var(--text-sm);line-height:1.85;color:var(--mid);
-  flex:1;margin-bottom:var(--sp-5);
-}
-.ph-feats{
-  list-style:none;display:flex;flex-wrap:wrap;gap:var(--sp-2);
-  margin-bottom:var(--sp-5);
-}
-.ph-feat{
-  font-size:10px;font-weight:600;letter-spacing:0.06em;
-  color:var(--mid);background:var(--bg);
-  padding:5px 12px;border-radius:999px;
-  border:1px solid rgba(0,0,0,0.07);
-}
-.ph-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:var(--sp-4);border-top:1px solid rgba(0,0,0,0.07);
-}
-.ph-price{
-  font-size:10px;font-weight:700;color:var(--light);
-  letter-spacing:0.08em;
-}
+.ph-badge{position:absolute;top:var(--sp-4);left:var(--sp-4);background:var(--ink);color:white;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:999px;}
+.ph-body{padding:var(--sp-6);flex:1;display:flex;flex-direction:column;}
+.ph-cat{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-2);}
+.ph-name{font-size:var(--text-xl);font-family:var(--font-d);font-weight:700;color:var(--ink);margin-bottom:var(--sp-3);line-height:1.1;letter-spacing:-.01em;}
+.ph-desc{font-size:var(--text-sm);line-height:1.85;color:var(--mid);flex:1;margin-bottom:var(--sp-5);}
+.ph-feats{list-style:none;display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-5);}
+.ph-feat{font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--mid);background:var(--bg);padding:5px 12px;border-radius:999px;border:1px solid rgba(0,0,0,.07);}
+.ph-footer{display:flex;align-items:center;justify-content:space-between;padding-top:var(--sp-4);border-top:1px solid rgba(0,0,0,.07);}
+.ph-price{font-size:10px;font-weight:700;color:var(--light);letter-spacing:.08em;}
 
-/* ── PERKS ── */
-.perks{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:var(--sp-3);margin-top:var(--sp-7);
-}
-.perk{
-  background:white;border-radius:16px;padding:var(--sp-5) var(--sp-4);
-  display:flex;gap:var(--sp-3);align-items:flex-start;
-  box-shadow:0 1px 4px rgba(0,0,0,0.04),0 4px 16px rgba(0,0,0,0.05);
-}
-.perk-ico{color:var(--gold);font-size:0.9rem;flex-shrink:0;margin-top:1px;}
+/* PERKS */
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3);margin-top:var(--sp-7);}
+.perk{background:white;border-radius:16px;padding:var(--sp-5) var(--sp-4);display:flex;gap:var(--sp-3);align-items:flex-start;box-shadow:0 1px 4px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.05);}
+.perk-ico{color:var(--gold);font-size:.9rem;flex-shrink:0;margin-top:1px;}
 .perk-t{font-size:10px;font-weight:700;color:var(--ink);margin-bottom:2px;}
 .perk-s{font-size:10px;color:var(--mid);line-height:1.5;}
 
-/* ── GALLERY ── */
-.sec-gallery{
-  background:var(--ink);
-  padding:var(--sp-11) 0;
-  overflow:hidden;
-}
-.gal-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:var(--sp-2);
-  margin-top:var(--sp-8);
-}
-.gal-item{
-  position:relative;overflow:hidden;
-  background:var(--ink-2);
-  border-radius:18px;cursor:pointer;
-  aspect-ratio:1/1;
-}
-.gal-item.tall{}
-.gal-item img{
-  width:100%;height:100%;object-fit:cover;
-  opacity:0.82;
-  transition:transform 0.8s var(--ease),opacity 0.4s;
-}
-.gal-item:hover img{transform:scale(1.04);opacity:0.95;}
-.gal-tag{
-  position:absolute;bottom:var(--sp-4);left:var(--sp-4);
-  background:rgba(8,8,6,0.65);
-  backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:10px;
-  padding:var(--sp-3) var(--sp-4);
-  opacity:0;transform:translateY(4px);
-  transition:opacity 0.25s var(--ease),transform 0.25s var(--ease);
-}
+/* GALLERY */
+.sec-gallery{background:var(--ink);padding:var(--sp-11) 0;}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-2);margin-top:var(--sp-8);}
+.gal-item{position:relative;overflow:hidden;background:var(--ink-2);border-radius:18px;cursor:pointer;aspect-ratio:1/1;}
+.gal-item img{width:100%;height:100%;object-fit:cover;opacity:.82;transition:transform .8s var(--ease),opacity .4s;}
+.gal-item:hover img{transform:scale(1.04);opacity:.95;}
+.gal-tag{position:absolute;bottom:var(--sp-4);left:var(--sp-4);background:rgba(8,8,6,.65);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:var(--sp-3) var(--sp-4);opacity:0;transform:translateY(4px);transition:opacity .25s var(--ease),transform .25s var(--ease);}
 .gal-item:hover .gal-tag{opacity:1;transform:none;}
-.gal-tag-cat{
-  font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--gold);display:block;margin-bottom:2px;
-}
-.gal-tag-name{
-  font-size:var(--text-sm);font-weight:800;color:white;letter-spacing:-0.01em;
-}
+.gal-tag-cat{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2px;}
+.gal-tag-name{font-size:var(--text-sm);font-weight:800;color:white;letter-spacing:-.01em;}
 
-/* ── PROCESS ── */
-.sec-process{
-  background:var(--bg-2);
-  padding:var(--sp-11) 0;
-}
-.process-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:var(--sp-4);margin-top:var(--sp-8);
-}
-.proc-step{
-  background:white;padding:var(--sp-7) var(--sp-6);
-  border-radius:18px;
-  box-shadow:0 1px 4px rgba(0,0,0,0.04),0 4px 20px rgba(0,0,0,0.06);
-  transition:transform 0.3s var(--ease),box-shadow 0.3s;
-}
-.proc-step:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.1);}
-.proc-num{
-  font-size:10px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;
-  color:var(--gold);display:block;margin-bottom:var(--sp-5);
-}
-.proc-title{
-  font-size:var(--text-md);font-family:var(--font-display);font-weight:700;
-  color:var(--ink);margin-bottom:var(--sp-3);letter-spacing:-0.01em;
-  line-height:1.2;
-}
+/* PROCESS */
+.sec-process{background:var(--bg-2);padding:var(--sp-11) 0;}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);margin-top:var(--sp-8);}
+.proc-step{background:white;padding:var(--sp-7) var(--sp-6);border-radius:18px;box-shadow:0 1px 4px rgba(0,0,0,.04),0 4px 20px rgba(0,0,0,.06);transition:transform .3s var(--ease),box-shadow .3s;}
+.proc-step:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.1);}
+.proc-num{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:var(--sp-5);}
+.proc-title{font-size:var(--text-md);font-family:var(--font-d);font-weight:700;color:var(--ink);margin-bottom:var(--sp-3);letter-spacing:-.01em;line-height:1.2;}
 .proc-body{font-size:var(--text-sm);line-height:1.85;color:var(--mid);}
 
-/* ── CTA ── */
-.sec-cta{
-  background:var(--ink);
-  padding:var(--sp-11) 0;
-  text-align:center;position:relative;overflow:hidden;
-}
-.sec-cta::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% -10%,rgba(196,169,106,0.08) 0%,transparent 55%);
-  pointer-events:none;
-}
+/* METALMAD */
+.sec-mm{background:white;padding:var(--sp-11) 0;border-top:1px solid rgba(0,0,0,.07);}
+.mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-9);align-items:center;max-width:900px;margin:0 auto;}
+.mm-features{background:var(--bg-2);border-radius:20px;padding:var(--sp-7);display:flex;flex-direction:column;gap:var(--sp-5);}
+.mm-feature{display:flex;align-items:flex-start;gap:var(--sp-4);}
+.mm-icon{width:40px;height:40px;background:var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mm-feat-t{font-size:var(--text-sm);font-weight:700;color:var(--ink);margin-bottom:3px;}
+.mm-feat-b{font-size:10px;color:var(--mid);line-height:1.7;}
+
+/* CTA */
+.sec-cta{background:var(--ink);padding:var(--sp-11) 0;text-align:center;position:relative;overflow:hidden;}
+.sec-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(196,169,106,.08) 0%,transparent 55%);pointer-events:none;}
 .cta-inner{position:relative;}
-.cta-eyebrow{
-  font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;
-  color:var(--gold);
-  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);
-  margin-bottom:var(--sp-5);
-}
-.cta-eyebrow::before,.cta-eyebrow::after{
-  content:'';display:block;width:28px;height:1px;background:var(--gold);opacity:0.5;
-}
-.cta-title{
-  font-size:clamp(2.4rem,4vw,4rem);
-  font-family:var(--font-display);
-  font-weight:700;letter-spacing:-0.01em;line-height:1.06;
-  color:white;max-width:560px;margin:0 auto var(--sp-4);
-}
+.cta-eyebrow{font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);margin-bottom:var(--sp-5);}
+.cta-eyebrow::before,.cta-eyebrow::after{content:'';display:block;width:28px;height:1px;background:var(--gold);opacity:.5;}
+.cta-title{font-size:clamp(2.4rem,4vw,4rem);font-family:var(--font-d);font-weight:700;letter-spacing:-.01em;line-height:1.06;color:white;max-width:560px;margin:0 auto var(--sp-8);}
 .cta-title em{font-style:italic;color:var(--gold);font-weight:500;}
-.cta-body{
-  font-size:var(--text-sm);color:rgba(255,255,255,0.32);
-  max-width:360px;margin:0 auto var(--sp-8);line-height:1.9;
-}
-.cta-btns{
-  display:flex;gap:var(--sp-3);justify-content:center;
-  flex-wrap:wrap;margin-bottom:var(--sp-9);
-}
-.cta-markets{
-  display:flex;justify-content:center;flex-wrap:wrap;gap:0;
-  border-top:1px solid rgba(255,255,255,0.07);
-  padding-top:var(--sp-7);
-}
-.cta-mkt{
-  padding:0 var(--sp-6);
-  border-right:1px solid rgba(255,255,255,0.07);text-align:center;
-}
+.cta-btns{display:flex;gap:var(--sp-3);justify-content:center;flex-wrap:wrap;margin-bottom:var(--sp-9);}
+.cta-markets{display:flex;justify-content:center;border-top:1px solid rgba(255,255,255,.07);padding-top:var(--sp-7);}
+.cta-mkt{padding:0 var(--sp-6);border-right:1px solid rgba(255,255,255,.07);text-align:center;}
 .cta-mkt:last-child{border-right:none;}
-.cta-mkt-n{
-  font-family:var(--font-display);
-  font-size:1rem;font-weight:700;
-  color:rgba(255,255,255,0.4);display:block;margin-bottom:4px;
-  letter-spacing:-0.01em;
-}
-.cta-mkt-l{
-  font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
-  color:rgba(255,255,255,0.16);
-}
+.cta-mkt-n{font-family:var(--font-d);font-size:1rem;font-weight:700;color:rgba(255,255,255,.4);display:block;margin-bottom:4px;}
+.cta-mkt-l{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.16);}
 
-/* ── FOOTER ── */
-footer{
-  background:#080806;
-  padding:var(--sp-10) 0 var(--sp-6);
-  border-top:1px solid rgba(255,255,255,0.05);
-}
-.ft-grid{
-  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;
-  gap:var(--sp-9);margin-bottom:var(--sp-8);
-}
-.ft-brand-name{
-  font-family:var(--font-display);
-  font-size:1.6rem;font-weight:700;
-  letter-spacing:0.05em;
-  color:rgba(255,255,255,0.6);
-  margin-bottom:4px;display:block;
-}
-.ft-brand-sub{
-  font-size:9px;font-weight:600;letter-spacing:0.28em;
-  text-transform:uppercase;color:var(--gold);
-  display:block;margin-bottom:var(--sp-4);opacity:0.7;
-}
-.ft-about{
-  font-size:10px;line-height:2.1;
-  color:rgba(255,255,255,0.16);max-width:200px;margin-bottom:var(--sp-5);
-}
+/* FOOTER */
+footer{background:#080806;padding:var(--sp-10) 0 var(--sp-6);border-top:1px solid rgba(255,255,255,.05);}
+.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:var(--sp-9);margin-bottom:var(--sp-8);}
+.ft-brand-name{font-family:var(--font-d);font-size:1.6rem;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.6);margin-bottom:4px;display:block;}
+.ft-brand-sub{font-size:9px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:var(--sp-4);opacity:.7;}
+.ft-about{font-size:10px;line-height:2.1;color:rgba(255,255,255,.16);max-width:200px;margin-bottom:var(--sp-5);}
 .ft-soc{display:flex;gap:var(--sp-2);}
-.ft-soc-btn{
-  width:32px;height:32px;border-radius:999px;
-  border:1px solid rgba(255,255,255,0.1);
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,0.22);font-size:10px;font-weight:700;
-  transition:all 0.2s;
-}
+.ft-soc-btn{width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.22);font-size:10px;font-weight:700;transition:all .2s;}
 .ft-soc-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink);}
-.ft-col-title{
-  font-size:9px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;
-  color:rgba(255,255,255,0.18);display:block;margin-bottom:var(--sp-4);
-}
+.ft-col-title{font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.18);display:block;margin-bottom:var(--sp-4);}
 .ft-links{list-style:none;display:flex;flex-direction:column;gap:var(--sp-3);}
-.ft-links a{
-  font-size:10px;color:rgba(255,255,255,0.18);
-  transition:color 0.18s;font-weight:500;
-}
-.ft-links a:hover{color:rgba(255,255,255,0.65);}
-.ft-bottom{
-  border-top:1px solid rgba(255,255,255,0.05);padding-top:var(--sp-5);
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:var(--sp-3);
-}
-.ft-copy{font-size:10px;color:rgba(255,255,255,0.12);letter-spacing:0.08em;}
+.ft-links a{font-size:10px;color:rgba(255,255,255,.18);transition:color .18s;font-weight:500;}
+.ft-links a:hover{color:rgba(255,255,255,.65);}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:var(--sp-5);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-3);}
+.ft-copy{font-size:10px;color:rgba(255,255,255,.12);letter-spacing:.08em;}
 
-/* ── CART ── */
-.cart-ov{
-  position:fixed;inset:0;z-index:940;
-  background:rgba(8,8,6,0.5);backdrop-filter:blur(6px);
-  opacity:0;pointer-events:none;transition:opacity 0.3s;
-}
+/* CART */
+.cart-ov{position:fixed;inset:0;z-index:940;background:rgba(8,8,6,.5);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s;}
 .cart-ov.open{opacity:1;pointer-events:all;}
-.cart{
-  position:fixed;right:0;top:0;bottom:0;
-  width:400px;max-width:100vw;background:var(--bg);
-  z-index:950;transform:translateX(100%);
-  transition:transform 0.38s var(--ease);
-  display:flex;flex-direction:column;
-  box-shadow:-8px 0 48px rgba(0,0,0,0.15);
-}
+.cart{position:fixed;right:0;top:0;bottom:0;width:400px;max-width:100vw;background:var(--bg);z-index:950;transform:translateX(100%);transition:transform .38s var(--ease);display:flex;flex-direction:column;box-shadow:-8px 0 48px rgba(0,0,0,.15);}
 .cart.open{transform:translateX(0);}
-.cart-head{
-  padding:var(--sp-6) var(--sp-6) var(--sp-4);
-  border-bottom:1px solid rgba(0,0,0,0.07);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;background:white;
-}
-.cart-head-title{
-  font-family:var(--font-display);
-  font-size:1.2rem;font-weight:700;color:var(--ink);
-}
+.cart-head{padding:var(--sp-6) var(--sp-6) var(--sp-4);border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:white;}
+.cart-head-title{font-family:var(--font-d);font-size:1.2rem;font-weight:700;color:var(--ink);}
 .cart-head-right{display:flex;align-items:center;gap:var(--sp-3);}
-.cart-count-lbl{
-  font-size:10px;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--light);
-}
-.cart-x{
-  width:30px;height:30px;border-radius:999px;
-  background:rgba(0,0,0,0.06);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;color:var(--mid);transition:all 0.18s;
-}
-.cart-x:hover{background:rgba(0,0,0,0.12);color:var(--ink);}
+.cart-count-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--light);}
+.cart-x{width:30px;height:30px;border-radius:999px;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mid);transition:all .18s;}
+.cart-x:hover{background:rgba(0,0,0,.12);color:var(--ink);}
 .cart-body{flex:1;overflow-y:auto;padding:var(--sp-4) var(--sp-6);}
-.cart-empty{
-  height:100%;display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--light);
-}
-.cart-item{
-  display:flex;gap:var(--sp-3);
-  padding:var(--sp-4) 0;border-bottom:1px solid rgba(0,0,0,0.06);
-}
+.cart-empty{height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--light);}
+.cart-item{display:flex;gap:var(--sp-3);padding:var(--sp-4) 0;border-bottom:1px solid rgba(0,0,0,.06);}
 .cart-item:last-child{border-bottom:none;}
-.cart-item-img{
-  width:62px;height:62px;border-radius:10px;
-  background:var(--bg-2);overflow:hidden;flex-shrink:0;
-}
+.cart-item-img{width:62px;height:62px;border-radius:10px;background:var(--bg-2);overflow:hidden;flex-shrink:0;}
 .cart-item-img img{width:100%;height:100%;object-fit:cover;}
 .cart-item-info{flex:1;}
 .cart-item-name{font-size:var(--text-sm);font-weight:700;color:var(--ink);margin-bottom:2px;}
 .cart-item-price{font-size:var(--text-sm);color:var(--mid);}
 .cart-item-qty{display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-3);}
-.qty-btn{
-  width:24px;height:24px;border-radius:999px;
-  border:1.5px solid rgba(0,0,0,0.13);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:700;color:var(--ink);transition:all 0.15s;
-}
+.qty-btn{width:24px;height:24px;border-radius:999px;border:1.5px solid rgba(0,0,0,.13);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ink);transition:all .15s;}
 .qty-btn:hover{background:var(--ink);border-color:var(--ink);color:white;}
 .qty-val{font-size:var(--text-sm);font-weight:700;min-width:18px;text-align:center;}
-.qty-rm{color:var(--light);font-size:12px;margin-left:auto;padding:3px;transition:color 0.15s;}
+.qty-rm{color:var(--light);font-size:12px;margin-left:auto;padding:3px;transition:color .15s;}
 .qty-rm:hover{color:#dc2626;}
-.cart-foot{
-  padding:var(--sp-4) var(--sp-6) var(--sp-6);
-  border-top:1px solid rgba(0,0,0,0.07);
-  flex-shrink:0;background:white;
-}
-.cart-total-row{
-  display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--sp-4);
-}
-.cart-total-lbl{
-  font-size:10px;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--mid);
-}
-.cart-total-val{
-  font-family:var(--font-display);
-  font-size:1.8rem;font-weight:700;color:var(--ink);
-}
-.btn-checkout{
-  width:100%;background:var(--ink);color:white;
-  padding:13px;font-size:10px;font-weight:700;
-  letter-spacing:0.14em;text-transform:uppercase;
-  border-radius:999px;border:none;cursor:pointer;
-  font-family:'Montserrat',sans-serif;
-  transition:all 0.2s var(--ease);margin-bottom:var(--sp-3);
-}
+.cart-foot{padding:var(--sp-4) var(--sp-6) var(--sp-6);border-top:1px solid rgba(0,0,0,.07);flex-shrink:0;background:white;}
+.cart-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--sp-4);}
+.cart-total-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);}
+.cart-total-val{font-family:var(--font-d);font-size:1.8rem;font-weight:700;color:var(--ink);}
+.btn-checkout{width:100%;background:var(--ink);color:white;padding:13px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s var(--ease);margin-bottom:var(--sp-3);}
 .btn-checkout:hover{background:var(--ink-2);transform:translateY(-1px);}
-.btn-checkout:disabled{opacity:0.28;cursor:not-allowed;transform:none;}
-.cart-wa{text-align:center;font-size:11px;color:var(--light);}
-.cart-wa a{color:var(--ink);font-weight:700;}
+.btn-checkout:disabled{opacity:.28;cursor:not-allowed;transform:none;}
+.cart-note{text-align:center;font-size:11px;color:var(--light);}
 
-/* ── MODAL ── */
-.modal-ov{
-  position:fixed;inset:0;z-index:900;
-  background:rgba(8,8,6,0.6);backdrop-filter:blur(10px);
-  opacity:0;pointer-events:none;transition:opacity 0.3s;
-  display:flex;align-items:center;justify-content:center;padding:var(--sp-5);
-}
+/* MODAL */
+.modal-ov{position:fixed;inset:0;z-index:900;background:rgba(8,8,6,.6);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center;padding:var(--sp-5);}
 .modal-ov.open{opacity:1;pointer-events:all;}
-.modal{
-  background:white;border-radius:24px;
-  max-width:740px;width:100%;max-height:90vh;overflow-y:auto;
-  transform:translateY(18px) scale(0.97);
-  transition:transform 0.35s var(--ease);
-  position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.22);
-}
+.modal{background:white;border-radius:24px;max-width:740px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(18px) scale(.97);transition:transform .35s var(--ease);position:relative;box-shadow:0 32px 80px rgba(0,0,0,.22);}
 .modal-ov.open .modal{transform:none;}
 .modal-layout{display:grid;grid-template-columns:1fr 1fr;}
-.modal-photo{
-  background:var(--bg-2);min-height:400px;
-  border-radius:24px 0 0 24px;overflow:hidden;
-}
-.modal-photo img{
-  width:100%;height:100%;object-fit:cover;
-  border-radius:24px 0 0 24px;
-}
-.modal-body{padding:var(--sp-7) var(--sp-6);display:flex;flex-direction:column;}
-.modal-cat{
-  font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:var(--sp-2);
-}
-.modal-name{
-  font-family:var(--font-display);
-  font-size:var(--text-xl);font-weight:700;
-  letter-spacing:-0.01em;line-height:1.1;
-  color:var(--ink);margin-bottom:var(--sp-2);
-}
-.modal-price{
-  font-family:var(--font-display);
-  font-size:var(--text-xl);font-weight:700;
-  letter-spacing:-0.01em;color:var(--ink);
-}
-.modal-pnote{font-size:11px;color:var(--light);display:block;margin-bottom:var(--sp-4);}
-.modal-desc{font-size:var(--text-sm);line-height:1.9;color:var(--mid);flex:1;margin-bottom:var(--sp-4);}
-.modal-feats-title{
-  font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--ink);margin-bottom:var(--sp-3);
-}
-.modal-feats ul{
-  list-style:none;display:flex;flex-direction:column;gap:var(--sp-2);
-  margin-bottom:var(--sp-5);
-  border-bottom:1px solid rgba(0,0,0,0.07);padding-bottom:var(--sp-4);
-}
-.modal-feats li{
-  font-size:var(--text-sm);color:var(--mid);
-  display:flex;align-items:center;gap:var(--sp-3);
-}
+.modal-photo{background:var(--bg-2);min-height:400px;border-radius:24px 0 0 24px;overflow:hidden;}
+.modal-photo img{width:100%;height:100%;object-fit:cover;border-radius:24px 0 0 24px;}
+.modal-body{padding:var(--sp-7) var(--sp-6);display:flex;flex-direction:column;overflow-y:auto;}
+.modal-cat{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-2);}
+.modal-name{font-family:var(--font-d);font-size:var(--text-xl);font-weight:700;letter-spacing:-.01em;line-height:1.1;color:var(--ink);margin-bottom:var(--sp-2);}
+.modal-price{font-family:var(--font-d);font-size:var(--text-xl);font-weight:700;color:var(--ink);}
+.modal-pnote{font-size:11px;color:var(--light);display:block;margin-bottom:var(--sp-3);}
+.modal-desc{font-size:var(--text-sm);line-height:1.9;color:var(--mid);margin-bottom:var(--sp-4);}
+.modal-feats-title{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:var(--sp-3);}
+.modal-feats ul{list-style:none;display:flex;flex-direction:column;gap:var(--sp-2);margin-bottom:var(--sp-4);border-bottom:1px solid rgba(0,0,0,.07);padding-bottom:var(--sp-4);}
+.modal-feats li{font-size:var(--text-sm);color:var(--mid);display:flex;align-items:center;gap:var(--sp-3);}
 .modal-feats li::before{content:'—';color:var(--gold);font-weight:700;flex-shrink:0;}
 .modal-ship{font-size:11px;color:var(--mid);margin-bottom:var(--sp-4);}
 .modal-ship strong{color:var(--ink);font-weight:700;}
-.modal-acts{display:flex;flex-direction:column;gap:var(--sp-2);}
-.btn-modal-add{
-  background:var(--ink);color:white;
-  padding:13px;font-size:10px;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:999px;border:none;cursor:pointer;
-  font-family:'Montserrat',sans-serif;transition:all 0.2s;
-}
+.modal-acts{display:flex;flex-direction:column;gap:var(--sp-2);margin-top:auto;}
+.btn-modal-add{background:var(--ink);color:white;padding:13px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;}
 .btn-modal-add:hover{background:var(--ink-2);}
-.btn-modal-wa{
-  border:1.5px solid rgba(0,0,0,0.12);color:var(--ink);
-  padding:12px;font-size:10px;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:999px;background:transparent;
-  font-family:'Montserrat',sans-serif;cursor:pointer;
-  text-align:center;display:block;transition:border-color 0.18s;
-}
-.btn-modal-wa:hover{border-color:var(--ink);}
-.modal-close{
-  position:absolute;top:var(--sp-3);right:var(--sp-3);
-  width:32px;height:32px;border-radius:999px;
-  background:rgba(0,0,0,0.07);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;color:var(--mid);transition:all 0.18s;z-index:2;
-}
-.modal-close:hover{background:rgba(0,0,0,0.13);color:var(--ink);}
+.btn-modal-notify{background:var(--gold);color:var(--ink);padding:13px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;display:none;}
+.btn-modal-contact{border:1.5px solid rgba(0,0,0,.12);color:var(--ink);padding:12px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;background:transparent;font-family:'Montserrat',sans-serif;cursor:pointer;text-align:center;display:block;transition:border-color .18s;}
+.btn-modal-contact:hover{border-color:var(--ink);}
+.modal-close{position:absolute;top:var(--sp-3);right:var(--sp-3);width:32px;height:32px;border-radius:999px;background:rgba(0,0,0,.07);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mid);transition:all .18s;z-index:2;}
+.modal-close:hover{background:rgba(0,0,0,.13);color:var(--ink);}
 
-/* ── FLOAT ── */
-.float{
-  position:fixed;bottom:var(--sp-6);right:var(--sp-6);
-  z-index:800;display:flex;flex-direction:column;gap:var(--sp-3);
-}
-.fbtn{
-  width:48px;height:48px;border-radius:999px;
-  display:flex;align-items:center;justify-content:center;
-  text-decoration:none;box-shadow:var(--shadow);
-  transition:transform 0.22s var(--ease),box-shadow 0.22s;
-}
+/* FLOAT */
+.float{position:fixed;bottom:var(--sp-6);right:var(--sp-6);z-index:800;display:flex;flex-direction:column;gap:var(--sp-3);}
+.fbtn{width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:var(--shadow);transition:transform .22s var(--ease),box-shadow .22s;}
 .fbtn:hover{transform:translateY(-3px);box-shadow:var(--shadow-h);}
 .fbtn svg{width:21px;height:21px;fill:white;}
 .fbtn-wa{background:#25D366;}
 .fbtn-ig{background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);}
 
-/* ── REVEAL ── */
-.rv{opacity:0;transform:translateY(16px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease);}
+/* REVEAL */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
 .rv.in{opacity:1;transform:none;}
-.d1{transition-delay:0.08s;}
-.d2{transition-delay:0.16s;}
-.d3{transition-delay:0.24s;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:1024px){
   :root{--gutter:28px;}
-  .nav{padding:0 var(--gutter);position:relative;}
+  .nav{position:relative;}
   .nav-links{display:none;}
-  .nav-links.open{
-    display:flex;flex-direction:column;gap:0;
-    position:absolute;top:100%;left:0;right:0;
-    background:rgba(14,14,12,0.98);
-    border-top:1px solid rgba(255,255,255,0.07);
-    padding:var(--sp-3) 0;
-    box-shadow:0 16px 40px rgba(0,0,0,0.3);z-index:210;
-  }
-  .nav-links.open .nav-link{
-    padding:14px var(--gutter);color:rgba(255,255,255,0.5);
-    border-bottom:1px solid rgba(255,255,255,0.05);
-    font-size:var(--text-sm);
-  }
+  .nav-links.open{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:rgba(14,14,12,.98);border-top:1px solid rgba(255,255,255,.07);padding:var(--sp-3) 0;box-shadow:0 16px 40px rgba(0,0,0,.3);z-index:210;}
+  .nav-links.open .nav-link{padding:14px var(--gutter);color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.05);font-size:var(--text-sm);}
   .nav-ham{display:flex;}
   .btn-nav{display:none;}
   .products-hero{grid-template-columns:1fr;max-width:500px;margin-left:auto;margin-right:auto;}
   .ph-img{height:300px;}
   .perks{grid-template-columns:1fr 1fr;}
-  .gal-grid-inner{grid-template-columns:1fr 1fr!important;}
+  .gal-grid{grid-template-columns:1fr 1fr;}
   .process-grid{grid-template-columns:1fr 1fr;}
+  .mm-grid{grid-template-columns:1fr;gap:var(--sp-5);}
   .ft-grid{grid-template-columns:1fr 1fr;gap:var(--sp-7);}
-  footer{padding:var(--sp-8) 0 var(--sp-5);}
   .modal-layout{grid-template-columns:1fr;}
   .modal-photo{min-height:240px;border-radius:24px 24px 0 0;}
   .modal-photo img{border-radius:24px 24px 0 0;}
-  .modal-body{padding:var(--sp-5) var(--sp-5) var(--sp-6);}
   .cart{width:100vw;}
+
+  .hero-sub{max-width:480px;}
+  .ph-footer{gap:var(--sp-2);}
 }
 @media(max-width:640px){
-  .mm-grid{grid-template-columns:1fr!important;gap:var(--sp-6)!important;}
   :root{--gutter:16px;}
   .hero{max-height:none;min-height:calc(100svh - var(--nav-h));}
+  .hero-img{object-position:center center;}
   .hero-h1{font-size:2.4rem;max-width:100%;}
-  .hero-sub{font-size:var(--text-sm);}
   .hero-btns{flex-direction:column;gap:var(--sp-2);}
   .btn-hero{width:100%;justify-content:center;}
   .hero-markers{gap:var(--sp-5);flex-wrap:wrap;}
@@ -955,6 +301,7 @@ footer{
   .ph-body{padding:var(--sp-5);}
   .ph-name{font-size:var(--text-lg);}
   .perks{grid-template-columns:1fr;}
+  .gal-grid{grid-template-columns:1fr 1fr;gap:var(--sp-2);}
   .process-grid{grid-template-columns:1fr;}
   .ft-grid{grid-template-columns:1fr;gap:var(--sp-6);}
   .cta-title{font-size:2rem;}
@@ -962,15 +309,20 @@ footer{
   .cta-mkt{border-right:none;padding:0 var(--sp-3);}
   .cta-btns{flex-direction:column;align-items:center;}
   .cta-btns .btn{width:100%;max-width:280px;justify-content:center;}
-  .sec-cta,.sec-gallery,.sec-products,.sec-process{padding:var(--sp-9) 0;}
-}
+  .sec-cta,.sec-gallery,.sec-products,.sec-process,.sec-mm{padding:var(--sp-9) 0;}
+  footer{padding:var(--sp-8) 0 var(--sp-5);}
 
-@media(max-width:1024px){
-  .gal-inline{grid-template-columns:1fr 1fr!important;}
-}
-@media(max-width:640px){
-  .gal-inline{grid-template-columns:1fr 1fr!important;gap:var(--sp-2)!important;}
-  .mm-grid{grid-template-columns:1fr!important;gap:var(--sp-5)!important;}
+  .hero-sub{max-width:100%;}
+  .ph-footer{flex-direction:column;align-items:flex-start;gap:var(--sp-3);}
+  .ph-footer .btn{width:100%;}
+  .float{bottom:var(--sp-4);right:var(--sp-4);}
+  .fbtn{width:42px;height:42px;}
+  .nav-logo span{display:none;}
+  .hero-markers{display:none;}
+  .perks .perk{padding:var(--sp-4);}
+  .proc-step{padding:var(--sp-5) var(--sp-4);}
+  .mm-features{padding:var(--sp-5);}
+  .sec-title{font-size:1.8rem;}
 }
 </style>
 </head>
@@ -990,14 +342,14 @@ footer{
         <div id="mSizes"></div>
         <p class="modal-desc" id="mDesc"></p>
         <div class="modal-feats">
-          <div class="modal-feats-title">Specifications</div>
+          <div class="modal-feats-title" id="mSpecsTitle">Especificaciones</div>
           <ul id="mFeats"></ul>
         </div>
-        <p class="modal-ship"><strong>Shipping:</strong> Mexico & United States</p>
+        <p class="modal-ship" id="mShip"><strong>Envío:</strong> México y Estados Unidos</p>
         <div class="modal-acts">
-          <button class="btn-modal-add" id="mAdd" onclick="addCart(0)">Add to cart</button>
-          <button class="btn-modal-add" id="mNotify" style="display:none;background:var(--gold);color:var(--ink);">Notify me when available →</button>
-          <a class="btn-modal-wa" id="mWa" href="#" target="_blank">Order now →</a>
+          <button class="btn-modal-add" id="mAdd" onclick="">Agregar al carrito</button>
+          <button class="btn-modal-notify" id="mNotify">Notificarme →</button>
+          <a class="btn-modal-contact" id="mContact" href="https://wa.me/526677300307" target="_blank">Contactar →</a>
         </div>
       </div>
     </div>
@@ -1008,59 +360,55 @@ footer{
 <div class="cart-ov" id="cOv" onclick="closeCart()"></div>
 <div class="cart" id="cDrawer">
   <div class="cart-head">
-    <div class="cart-head-title" id="cartTitle">Your order</div>
+    <div class="cart-head-title" id="cartTitle">Tu pedido</div>
     <div class="cart-head-right">
-      <span class="cart-count-lbl" id="cCount">0 items</span>
+      <span class="cart-count-lbl" id="cCount">0 artículos</span>
       <button class="cart-x" onclick="closeCart()">✕</button>
     </div>
   </div>
-  <div class="cart-body" id="cBody"><div class="cart-empty">Your cart is empty</div></div>
+  <div class="cart-body" id="cBody"><div class="cart-empty" id="cartEmpty">Tu carrito está vacío</div></div>
   <div class="cart-foot">
     <div class="cart-total-row">
-      <span class="cart-total-lbl" id="cartTotalLbl">Order total</span>
+      <span class="cart-total-lbl" id="cartTotalLbl">Total</span>
       <span class="cart-total-val" id="cTotal">—</span>
     </div>
-    <button class="btn-checkout" id="cBtn" disabled onclick="checkoutWA()">Order now →</button>
-    <div class="cart-wa">Need help? <a href="https://wa.me/526677300307" target="_blank">Contact us</a></div>
+    <button class="btn-checkout" id="cBtn" disabled onclick="checkoutContact()">Ordenar ahora →</button>
+    <div class="cart-note" id="cartNote">¿Necesitas ayuda? <a href="tel:6677300307">667 730 0307</a></div>
   </div>
 </div>
 
 <!-- ANNOUNCE -->
 <div class="ann">
   <div class="ann-track">
-    <span class="ann-item">Architectural Objects</span>
-    <span class="ann-item">Free shipping MX & USA</span>
-    <span class="ann-item">Precision design</span>
-    <span class="ann-item">Handcrafted in Mexico</span>
-    <span class="ann-item">Premium steel</span>
-    <span class="ann-item">Planters · Doors · Gates</span>
-    <span class="ann-item">Architectural Objects</span>
-    <span class="ann-item">Free shipping MX & USA</span>
-    <span class="ann-item">Precision design</span>
-    <span class="ann-item">Handcrafted in Mexico</span>
-    <span class="ann-item">Premium steel</span>
-    <span class="ann-item">Planters · Doors · Gates</span>
+    <span class="ann-item" id="ann1">Envíos a México, USA e internacional</span>
+    <span class="ann-item" id="ann2">Entrega directa a tu puerta</span>
+    <span class="ann-item" id="ann3">Fabricación propia en México</span>
+    <span class="ann-item" id="ann4">Diseño de precisión artesanal</span>
+    <span class="ann-item" id="ann5">Acero premium</span>
+    <span class="ann-item" id="ann6">Macetas · Puertas · Portones</span>
+    <span class="ann-item">Envíos a México, USA e internacional</span>
+    <span class="ann-item">Entrega directa a tu puerta</span>
+    <span class="ann-item">Fabricación propia en México</span>
+    <span class="ann-item">Diseño de precisión artesanal</span>
+    <span class="ann-item">Acero premium</span>
+    <span class="ann-item">Macetas · Puertas · Portones</span>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">
-    ARQEN
-    <span>Architectural Objects</span>
-  </div>
+  <div class="nav-logo">ARQEN<span>Architectural Objects</span></div>
   <div class="nav-links" id="navLinks">
-    <a href="#productos" class="nav-link">Products</a>
-    <a href="#galeria" class="nav-link">Gallery</a>
-    <a href="#proceso" class="nav-link">How it works</a>
-    <a href="#contacto" class="nav-link">Contact</a>
+    <a href="#productos" class="nav-link" id="navL1">Productos</a>
+    <a href="#galeria" class="nav-link" id="navL2">Galería</a>
+    <a href="#proceso" class="nav-link" id="navL3">Cómo funciona</a>
+    <a href="#contacto" class="nav-link" id="navL4">Contacto</a>
   </div>
   <div class="nav-actions">
     <button class="nav-cart" onclick="openCart()">
-      Cart <span class="cart-badge" id="nBadge">0</span>
+      <span id="navCart">Carrito</span> <span class="cart-badge" id="nBadge">0</span>
     </button>
-    <a href="https://wa.me/526677300307" target="_blank" class="btn-nav">Shop now →</a>
-    <button class="lang-btn" id="currBtn" onclick="toggleCurrency()" style="margin-right:4px;">USD</button>
+    <a href="#productos" class="btn-nav" id="navBtn">Comprar →</a>
     <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
     <button class="nav-ham" id="nHam" onclick="toggleNav()"><span></span><span></span><span></span></button>
   </div>
@@ -1068,28 +416,31 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-img" src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11%20%282%29.jpeg" alt="ARQEN — Maceta CNC retroiluminada en terraza">
+  <picture>
+  <source media="(max-width:640px)" srcset="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Night_photography_illuminated_CNC_steel_planter_warm_amber_LED_light_glowing_thr-0.jpg">
+  <img class="hero-img" src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11%20%282%29.jpeg" alt="ARQEN — Maceta retroiluminada">
+</picture>
   <div class="hero-overlay"></div>
   <div class="hero-body">
-    <div class="hero-tag" id="heroTag">Free shipping · Mexico & United States</div>
-    <h1 class="hero-h1" id="heroH1">Steel objects.<br><em>Designed to last.</em></h1>
-    <p class="hero-sub" id="heroSub">Illuminated steel planters and self-install doors. Precision design, handcrafted in Mexico, delivered to your door.</p>
+    <div class="hero-tag" id="heroTag">Envíos a México, USA y más</div>
+    <h1 class="hero-h1" id="heroH1">Objetos de acero.<br><em>Diseñados para durar.</em></h1>
+    <p class="hero-sub" id="heroSub">Macetas retroiluminadas y puertas autoinstalables. Diseño de precisión, fabricación propia, entrega a tu puerta.</p>
     <div class="hero-btns">
-      <a href="#productos" class="btn-hero btn-hero-gold" id="heroCta1">Shop now</a>
-      <a href="https://wa.me/526677300307" target="_blank" class="btn-hero btn-hero-ghost" id="heroCta2">Get in touch →</a>
+      <a href="#productos" class="btn-hero btn-hero-gold" id="heroCta1">Ver productos</a>
+      <a href="https://wa.me/526677300307" target="_blank" class="btn-hero btn-hero-ghost" id="heroCta2">Contáctanos →</a>
     </div>
     <div class="hero-markers">
       <div class="hero-marker">
         <span class="hero-marker-val" id="heroM1v">MX · US · CA</span>
-        <span class="hero-marker-label" id="heroM1l">We ship to</span>
+        <span class="hero-marker-label" id="heroM1l">Enviamos a</span>
       </div>
       <div class="hero-marker">
-        <span class="hero-marker-val" id="heroM2v">Handcrafted</span>
-        <span class="hero-marker-label" id="heroM2l">Made in Mexico</span>
+        <span class="hero-marker-val" id="heroM2v">Fabricación propia</span>
+        <span class="hero-marker-label" id="heroM2l">Hecho en México</span>
       </div>
       <div class="hero-marker">
-        <span class="hero-marker-val" id="heroM3v">Precision craft</span>
-        <span class="hero-marker-label" id="heroM3l">Technology</span>
+        <span class="hero-marker-val" id="heroM3v">Hecho a mano</span>
+        <span class="hero-marker-label" id="heroM3l">Artesanía</span>
       </div>
     </div>
   </div>
@@ -1099,59 +450,52 @@ footer{
 <section class="sec-products" id="productos">
   <div class="wrap">
     <div style="text-align:center;">
-      <span class="eyebrow rv" id="prodEye">Our products</span>
-      <h2 class="sec-title rv d1" id="prodTitle">Objects that transform <em>spaces</em></h2>
-      <p class="sec-desc rv d2" id="prodDesc" style="margin:var(--sp-3) auto 0;">Each piece made to order in our studio. Precision, premium materials, shipped directly to you.</p>
+      <span class="eyebrow rv" id="prodEye">Nuestros productos</span>
+      <h2 class="sec-title rv d1" id="prodTitle">Objetos que transforman <em>espacios</em></h2>
     </div>
     <div class="products-hero">
       <div class="ph-card rv" onclick="openModal(1)">
         <div class="ph-img">
-          <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11.jpeg" alt="Maceta CNC Árbol retroiluminada" loading="lazy">
-          <span class="ph-badge">Pieza estrella</span>
+          <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11.jpeg" alt="Árbol — Maceta Retroiluminada" loading="lazy">
+          <span class="ph-badge" id="p1badge">Pieza estrella</span>
         </div>
         <div class="ph-body">
-          <span class="ph-cat" id="p1cat">Garden & Terrace</span>
-          <h3 class="ph-name" id="p1name">Árbol<br>Illuminated Planter</h3>
-          <p class="ph-desc" id="p1desc">Galvanized steel cal. 14 with a precision-cut tree silhouette. Integrated LED lighting, electrostatic powder coat finish and drainage. Made to your exact measurements.</p>
+          <span class="ph-cat" id="p1cat">Jardín & Terraza</span>
+          <h3 class="ph-name" id="p1name">Árbol<br>Maceta Retroiluminada</h3>
+          <p class="ph-desc" id="p1desc">Lámina galvanizada cal. 14 con silueta de árbol cortada a precisión. Iluminación LED integrada, pintura electrostática y desagüe. Fabricada a la medida exacta de tu espacio.</p>
           <ul class="ph-feats">
-            <li class="ph-feat" id="p1f1">Galvanized steel</li>
-            <li class="ph-feat" id="p1f2">LED included</li>
-            <li class="ph-feat" id="p1f3">Laser cut</li>
-            <li class="ph-feat" id="p1f4">Ships MX & USA</li>
+            <li class="ph-feat" id="p1f1">Acero galvanizado</li>
+            <li class="ph-feat" id="p1f2">LED incluido</li>
+            <li class="ph-feat" id="p1f3">Corte de precisión</li>
+            <li class="ph-feat" id="p1f4">Envío MX y USA</li>
           </ul>
           <div class="ph-footer">
-            <span class="ph-price" id="p1price">From $3,800 MXN · $190 USD</span>
-            <button class="btn btn-dark" onclick="event.stopPropagation();openModal(1)" id="p1cta">View details →</button>
+            <span class="ph-price" id="p1price">Elige tu medida →</span>
+            <button class="btn btn-dark" id="p1cta" onclick="event.stopPropagation();openModal(1)">Ver detalles →</button>
           </div>
         </div>
       </div>
       <div class="ph-card rv d1" onclick="openModal(2)">
         <div class="ph-img">
-          <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Product_photography_premium_steel_security_door_full_panel_CNC_laser_cut_organic-0.jpg" alt="Puerta CNC autoinstalable de acero" loading="lazy">
-          <span class="ph-badge">Próximamente</span>
+          <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Product_photography_premium_steel_security_door_full_panel_CNC_laser_cut_organic-0.jpg" alt="Iron Gate — Puerta de Acero Autoinstalable" loading="lazy">
+          <span class="ph-badge" id="p2badge">Nuevo</span>
         </div>
         <div class="ph-body">
-          <span class="ph-cat" id="p2cat">Doors</span>
-          <h3 class="ph-name" id="p2name">Iron Gate<br>Self-Install Door</h3>
-          <p class="ph-desc" id="p2desc">Steel with Laser cut designs. Frame, hardware and installation guide included. Multiple designs available. Ships anywhere in Mexico and the US.</p>
+          <span class="ph-cat" id="p2cat">Puertas</span>
+          <h3 class="ph-name" id="p2name">Puerta de Acero<br>Autoinstalable</h3>
+          <p class="ph-desc" id="p2desc">Acero con diseños únicos cortados a precisión. Marco, herrajes y guía de instalación incluidos. Múltiples diseños. Envío a México y USA.</p>
           <ul class="ph-feats">
-            <li class="ph-feat" id="p2f1">Self-install</li>
-            <li class="ph-feat" id="p2f2">Frame included</li>
-            <li class="ph-feat" id="p2f3">Laser cut</li>
-            <li class="ph-feat" id="p1f4">Ships MX & USA</li>
+            <li class="ph-feat" id="p2f1">Autoinstalable</li>
+            <li class="ph-feat" id="p2f2">Marco incluido</li>
+            <li class="ph-feat" id="p2f3">Corte de precisión</li>
+            <li class="ph-feat" id="p2f4">Envío MX y USA</li>
           </ul>
           <div class="ph-footer">
-            <span class="ph-price" id="p2price">Próximamente</span>
-            <button class="btn btn-dark" onclick="event.stopPropagation();openModal(2)" id="p2cta">View details →</button>
+            <span class="ph-price" id="p2price">Elige tu medida →</span>
+            <button class="btn btn-dark" id="p2cta" onclick="event.stopPropagation();openModal(2)">Ver detalles →</button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="perks">
-      <div class="perk rv"><div class="perk-ico">✦</div><div><div class="perk-t" id="pk1t">Ships to MX & USA</div><div class="perk-s" id="pk1s">We coordinate per destination</div></div></div>
-      <div class="perk rv d1"><div class="perk-ico">✦</div><div><div class="perk-t" id="pk2t">Handcrafted</div><div class="perk-s" id="pk2s">Designed & made in our studio</div></div></div>
-      <div class="perk rv d2"><div class="perk-ico">✦</div><div><div class="perk-t" id="pk3t">Made to order</div><div class="perk-s" id="pk3s">Custom sizes & finishes available</div></div></div>
-      <div class="perk rv d3"><div class="perk-ico">✦</div><div><div class="perk-t" id="pk4t">Response in 2 hours</div><div class="perk-s" id="pk4s">667 730 0307</div></div></div>
     </div>
   </div>
 </section>
@@ -1160,84 +504,41 @@ footer{
 <section class="sec-gallery" id="galeria">
   <div class="wrap">
     <div>
-      <span class="eyebrow eyebrow-light rv" id="galEye">In real spaces</span>
-      <h2 class="sec-title sec-title-light rv d1" id="galTitle">Design you can <em>feel</em></h2>
+      <span class="eyebrow eyebrow-light rv" id="galEye">En espacios reales</span>
+      <h2 class="sec-title sec-title-light rv d1" id="galTitle">Diseño que se <em>vive</em></h2>
     </div>
-    <div class="gal-inline" style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-2);margin-top:var(--sp-8);">
-      <div class="gal-item rv" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Architectural_photography_luxury_home_entrance_custom_CNC_steel_door_with_tree_p-0.jpg" alt="CNC door luxury entrance" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt1c">Doors</span><span class="gal-tag-name" id="gt1n">Árbol Entrance</span></div>
+    <div class="gal-grid">
+      <div class="gal-item rv">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Architectural_photography_luxury_home_entrance_custom_CNC_steel_door_with_tree_p-0.jpg" alt="Entrada árbol" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt1c">Puertas</span><span class="gal-tag-name" id="gt1n">Entrada Árbol</span></div>
       </div>
-      <div class="gal-item rv d1" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Architectural_photography_modern_home_exterior_at_night_illuminated_custom_steel-0.jpg" alt="CNC door night" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt2c">Doors</span><span class="gal-tag-name" id="gt2n">Night Facade</span></div>
+      <div class="gal-item rv d1">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Architectural_photography_modern_home_exterior_at_night_illuminated_custom_steel-0.jpg" alt="Fachada nocturna" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt2c">Puertas</span><span class="gal-tag-name" id="gt2n">Fachada Nocturna</span></div>
       </div>
-      <div class="gal-item rv d2" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11.jpeg" alt="CNC planter backlit" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt3c">Planters</span><span class="gal-tag-name" id="gt3n">Árbol Illuminated</span></div>
+      <div class="gal-item rv d2">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11.jpeg" alt="Maceta retroiluminada" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt3c">Macetas</span><span class="gal-tag-name" id="gt3n">Árbol Iluminada</span></div>
       </div>
-      <div class="gal-item rv d3" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11%20%281%29.jpeg" alt="CNC planter detail" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt4c">Planters</span><span class="gal-tag-name" id="gt4n">Árbol Detail</span></div>
+      <div class="gal-item rv d3">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11%20%281%29.jpeg" alt="Maceta detalle" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt4c">Macetas</span><span class="gal-tag-name" id="gt4n">Árbol Detalle</span></div>
       </div>
-      <div class="gal-item rv" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_architectural_photography_modern_mexican_home_exterior_at_dusk_premium_steel_fro-0.jpg" alt="CNC door dusk" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt5c">Doors</span><span class="gal-tag-name" id="gt5n">Dusk Facade</span></div>
+      <div class="gal-item rv">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_architectural_photography_modern_mexican_home_exterior_at_dusk_premium_steel_fro-0.jpg" alt="Fachada crepúsculo" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt5c">Puertas</span><span class="gal-tag-name" id="gt5n">Fachada Crepúsculo</span></div>
       </div>
-      <div class="gal-item rv d1" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Product_photography_steel_door_with_geometric_CNC_cut_pattern_circles_and_hexago-0.jpg" alt="CNC geometric door" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt6c">Doors</span><span class="gal-tag-name" id="gt6n">Geometric Gate</span></div>
+      <div class="gal-item rv d1">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Product_photography_steel_door_with_geometric_CNC_cut_pattern_circles_and_hexago-0.jpg" alt="Puerta geométrica" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt6c">Puertas</span><span class="gal-tag-name" id="gt6n">Geométrico</span></div>
       </div>
-      <div class="gal-item rv d2" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Lifestyle_photography_luxury_CNC_steel_planter_with_organic_tree_pattern_matte_b-0.jpg" alt="CNC planter lifestyle" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt7c">Planters</span><span class="gal-tag-name" id="gt7n">Lifestyle</span></div>
+      <div class="gal-item rv d2">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Lifestyle_photography_luxury_CNC_steel_planter_with_organic_tree_pattern_matte_b-0.jpg" alt="Maceta lifestyle" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt7c">Macetas</span><span class="gal-tag-name" id="gt7n">Lifestyle</span></div>
       </div>
-      <div class="gal-item rv d3" style="aspect-ratio:1/1;">
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Night_photography_illuminated_CNC_steel_planter_warm_amber_LED_light_glowing_thr-0.jpg" alt="CNC planter LED night" loading="lazy">
-        <div class="gal-tag"><span class="gal-tag-cat" id="gt8c">Planters</span><span class="gal-tag-name" id="gt8n">LED Night</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- METALMAD SECTION -->
-<section style="background:white;padding:var(--sp-11) 0;border-top:1px solid rgba(0,0,0,0.07);">
-  <div class="wrap">
-    <div class="mm-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-9);align-items:center;max-width:900px;margin:0 auto;">
-      <div class="rv">
-        <span style="font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--light);display:block;margin-bottom:var(--sp-4);" id="mmEye">Crafted by</span>
-        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/metalmad/logometalmad.png" alt="MetalMad" style="height:36px;width:auto;display:block;margin-bottom:var(--sp-5);filter:brightness(0);">
-        <p style="font-size:var(--text-sm);line-height:1.9;color:var(--mid);margin-bottom:var(--sp-6);max-width:380px;" id="mmDesc">Premium steel fabrication studio based in Sinaloa, Mexico. Over 25 years crafting bespoke architectural metalwork — from custom doors and staircases to full residential and commercial projects.</p>
-        <a href="https://metalmad.mx" target="_blank" style="display:inline-flex;align-items:center;gap:var(--sp-2);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.5" onmouseout="this.style.opacity=1" id="mmLink">Custom projects → metalmad.mx</a>
-      </div>
-      <div class="rv d1" style="background:var(--bg-2);border-radius:20px;padding:var(--sp-7);display:flex;flex-direction:column;gap:var(--sp-5);">
-        <div style="display:flex;align-items:flex-start;gap:var(--sp-4);">
-          <div style="width:40px;height:40px;background:var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <div>
-            <div style="font-size:var(--text-sm);font-weight:700;color:var(--ink);margin-bottom:3px;" id="mm1t">Custom design & fabrication</div>
-            <div style="font-size:10px;color:var(--mid);line-height:1.7;" id="mm1b">Doors, gates, staircases, railings — designed and built to spec.</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:var(--sp-4);">
-          <div style="width:40px;height:40px;background:var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div>
-            <div style="font-size:var(--text-sm);font-weight:700;color:var(--ink);margin-bottom:3px;" id="mm2t">25+ years of experience</div>
-            <div style="font-size:10px;color:var(--mid);line-height:1.7;" id="mm2b">Trusted by architects, builders and homeowners across Mexico.</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:var(--sp-4);">
-          <div style="width:40px;height:40px;background:var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div style="font-size:var(--text-sm);font-weight:700;color:var(--ink);margin-bottom:3px;" id="mm3t">Based in Sinaloa, Mexico</div>
-            <div style="font-size:10px;color:var(--mid);line-height:1.7;" id="mm3b">On-site installation in Sinaloa. Nationwide & international shipping.</div>
-          </div>
-        </div>
+      <div class="gal-item rv d3">
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Night_photography_illuminated_CNC_steel_planter_warm_amber_LED_light_glowing_thr-0.jpg" alt="Maceta LED noche" loading="lazy">
+        <div class="gal-tag"><span class="gal-tag-cat" id="gt8c">Macetas</span><span class="gal-tag-name" id="gt8n">LED Noche</span></div>
       </div>
     </div>
   </div>
@@ -1259,12 +560,40 @@ footer{
       <div class="proc-step rv d1">
         <span class="proc-num">02</span>
         <div class="proc-title" id="proc2t">Agrega al carrito</div>
-        <p class="proc-body" id="proc2b">Selecciona tu medida y acabado. El precio se muestra al instante — o contáctanos si necesitas medidas personalizadas.</p>
+        <p class="proc-body" id="proc2b">Selecciona tu medida y acabado. El precio se muestra al instante.</p>
       </div>
       <div class="proc-step rv d2">
         <span class="proc-num">03</span>
         <div class="proc-title" id="proc3t">Te la enviamos</div>
-        <p class="proc-body" id="proc3b">Fabricamos tu pieza bajo pedido y la enviamos directamente a tu dirección — a cualquier parte de México o Estados Unidos.</p>
+        <p class="proc-body" id="proc3b">Fabricamos tu pieza y la enviamos directamente a tu puerta — a cualquier parte de México o Estados Unidos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METALMAD -->
+<section class="sec-mm">
+  <div class="wrap">
+    <div class="mm-grid">
+      <div class="rv">
+        <span class="eyebrow" id="mmEye">Fabricado por</span>
+        <img src="https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/metalmad/logometalmad.png" alt="MetalMad" style="height:36px;width:auto;display:block;margin-bottom:var(--sp-5);filter:brightness(0);">
+        <p style="font-size:var(--text-sm);line-height:1.9;color:var(--mid);margin-bottom:var(--sp-6);max-width:380px;" id="mmDesc">Taller de herrería premium en Sinaloa, México. Más de 25 años fabricando metalwork arquitectónico a la medida — desde puertas y escaleras hasta proyectos residenciales y comerciales completos.</p>
+        <a href="https://metalmad.mx" target="_blank" id="mmLink" style="display:inline-flex;align-items:center;gap:var(--sp-2);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px;transition:opacity .2s;" onmouseover="this.style.opacity=.5" onmouseout="this.style.opacity=1">Proyectos a medida → metalmad.mx</a>
+      </div>
+      <div class="mm-features rv d1">
+        <div class="mm-feature">
+          <div class="mm-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <div><div class="mm-feat-t" id="mm1t">Diseño y fabricación a la medida</div><div class="mm-feat-b" id="mm1b">Puertas, portones, escaleras, barandales — diseñados y fabricados a tu especificación.</div></div>
+        </div>
+        <div class="mm-feature">
+          <div class="mm-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><div class="mm-feat-t" id="mm2t">25+ años de experiencia</div><div class="mm-feat-b" id="mm2b">Elegidos por arquitectos, constructoras y clientes en todo México.</div></div>
+        </div>
+        <div class="mm-feature">
+          <div class="mm-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="mm-feat-t" id="mm3t">Basados en Sinaloa, México</div><div class="mm-feat-b" id="mm3b">Instalación en Sinaloa incluida. Envíos nacionales e internacionales.</div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1273,21 +602,16 @@ footer{
 <!-- CTA -->
 <section class="sec-cta" id="contacto">
   <div class="wrap cta-inner">
-    <div class="cta-eyebrow rv" id="ctaEye">Start today</div>
-    <h2 class="cta-title rv d1" id="ctaTitle">Ready to transform<br>your <em>space?</em></h2>
-    
-    <div class="cta-btns rv d3">
-      <a href="#productos" class="btn btn-gold" id="ctaBtn">
-        <svg width="16" height="16" style="display:none;" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.79 23.329l4.47-1.478A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-2.169 0-4.206-.63-5.91-1.715l-.424-.253-2.653.878.867-2.57-.276-.437A9.796 9.796 0 012.18 12c0-5.421 4.399-9.82 9.82-9.82 5.421 0 9.82 4.399 9.82 9.82 0 5.421-4.399 9.82-9.82 9.82z"/></svg>
-        Ver productos
-      </a>
-      <a href="https://instagram.com/metalmadmx" target="_blank" class="btn btn-ghost-light">@arqen.mx</a>
+    <div class="cta-eyebrow rv" id="ctaEye">Empieza hoy</div>
+    <h2 class="cta-title rv d1" id="ctaTitle">¿Listo para transformar<br>tu <em>espacio?</em></h2>
+    <div class="cta-btns rv d2">
+      <a href="#productos" class="btn btn-gold" id="ctaBtn">Ver productos →</a>
+      <a href="https://wa.me/526677300307" target="_blank" class="btn btn-ghost-light" id="ctaBtn2">Contáctanos</a>
     </div>
-    <div class="cta-markets rv">
-      <div class="cta-mkt"><span class="cta-mkt-n" id="ctaM1">México</span><span class="cta-mkt-l">Envíos</span></div>
-      <div class="cta-mkt"><span class="cta-mkt-n" id="ctaM2">Estados Unidos</span><span class="cta-mkt-l">Envíos</span></div>
-      <div class="cta-mkt"><span class="cta-mkt-n" id="ctaM3">Internacional</span><span class="cta-mkt-l">Envíos</span></div>
-    </div>
+    <div class="cta-markets rv d3">
+      <div class="cta-mkt"><span class="cta-mkt-n" id="ctaM1">México</span><span class="cta-mkt-l" id="ctaMl1">Enviamos</span></div>
+      <div class="cta-mkt"><span class="cta-mkt-n" id="ctaM2">Estados Unidos</span><span class="cta-mkt-l" id="ctaMl2">Enviamos</span></div>
+      <div class="cta-mkt"><span class="cta-mkt-n" id="ctaM3">Internacional</span><span class="cta-mkt-l" id="ctaMl3">Enviamos</span></div>
     </div>
   </div>
 </section>
@@ -1299,45 +623,45 @@ footer{
       <div>
         <span class="ft-brand-name">ARQEN</span>
         <span class="ft-brand-sub">Architectural Objects</span>
-        <p class="ft-about"><span id="ftDesc">Steel design objects. Illuminated planters and self-install doors. We ship across Mexico and the United States.</span></p>
+        <p class="ft-about" id="ftDesc">Objetos de diseño en acero. Macetas retroiluminadas y puertas autoinstalables. Enviamos a todo México, USA e internacionalmente.</p>
         <div class="ft-soc">
           <a href="https://instagram.com/metalmadmx" target="_blank" class="ft-soc-btn">IG</a>
-          <a href="https://wa.me/526677300307" target="_blank" class="ft-soc-btn">WA</a>
+          <a href="tel:6677300307" class="ft-soc-btn">☎</a>
         </div>
       </div>
       <div>
-        <span class="ft-col-title" id="ftCol1">Products</span>
+        <span class="ft-col-title" id="ftCol1">Productos</span>
         <ul class="ft-links">
-          <li><a href="#productos" id="ftP1">Planters</a></li>
-          <li><a href="#productos" id="ftP2">Self-install Doors</a></li>
+          <li><a href="#productos" id="ftP1">Macetas Iluminadas</a></li>
+          <li><a href="#productos" id="ftP2">Puertas Autoinstalables</a></li>
         </ul>
       </div>
       <div>
-        <span class="ft-col-title" id="ftCol2">About</span>
+        <span class="ft-col-title" id="ftCol2">Información</span>
         <ul class="ft-links">
-          <li><a href="#proceso" id="ftA1">How it works</a></li>
-          <li><a href="#galeria" id="ftA2">Gallery</a></li>
+          <li><a href="#proceso" id="ftA1">Cómo funciona</a></li>
+          <li><a href="#galeria" id="ftA2">Galería</a></li>
+          <li><a href="https://metalmad.mx" target="_blank" id="ftA3">MetalMad → metalmad.mx</a></li>
         </ul>
-        </div>
+      </div>
       <div>
-        <span class="ft-col-title" id="ftCol3">Contact</span>
+        <span class="ft-col-title" id="ftCol3">Contacto</span>
         <ul class="ft-links">
           <li><a href="tel:6677300307">667 730 0307</a></li>
-          <li><a href="https://wa.me/526677300307" target="_blank">WhatsApp</a></li>
           <li><a href="https://instagram.com/metalmadmx" target="_blank">@metalmadmx</a></li>
         </ul>
       </div>
     </div>
     <div class="ft-bottom">
-      <span class="ft-copy" id="ftCopy1">© 2026 ARQEN — Architectural Objects. All rights reserved.</span>
-      <span class="ft-copy" id="ftCopy2">Steel design, made in Mexico.</span>
+      <span class="ft-copy" id="ftCopy1">© 2026 ARQEN — Architectural Objects. Todos los derechos reservados.</span>
+      <span class="ft-copy" id="ftCopy2">Diseño en acero, hecho en México.</span>
     </div>
   </div>
 </footer>
 
 <!-- FLOAT -->
 <div class="float">
-  <a href="https://wa.me/526677300307" target="_blank" class="fbtn fbtn-wa" aria-label="Contact">
+  <a href="https://wa.me/526677300307" target="_blank" class="fbtn fbtn-wa" aria-label="Contacto">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.79 23.329l4.47-1.478A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-2.169 0-4.206-.63-5.91-1.715l-.424-.253-2.653.878.867-2.57-.276-.437A9.796 9.796 0 012.18 12c0-5.421 4.399-9.82 9.82-9.82 5.421 0 9.82 4.399 9.82 9.82 0 5.421-4.399 9.82-9.82 9.82z"/></svg>
   </a>
   <a href="https://instagram.com/metalmadmx" target="_blank" class="fbtn fbtn-ig" aria-label="Instagram">
@@ -1348,480 +672,288 @@ footer{
 <script>
 const WA='526677300307';
 const products=[
-  {
-    id:1, name:'Árbol — Illuminated Planter', nameEs:'Árbol — Maceta Retroiluminada',
-    cat:'Garden & Terrace', catEs:'Jardín & Terraza',
-    badge:'Best seller', badgeEs:'Más vendido',
+  {id:1,comingSoon:false,
     imgUrl:'https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/WhatsApp%20Image%202026-04-13%20at%2017.01.11.jpeg',
-    desc:'Galvanized steel cal. 14 with a precision-cut tree silhouette. Integrated LED lighting, electrostatic powder coat finish and built-in drainage. Handcrafted to order.',
-    descEs:'Lámina galvanizada cal. 14 con silueta de árbol cortada a precisión. Iluminación LED integrada, pintura electrostática y desagüe. Fabricada bajo pedido.',
-    features:['Galvanized steel cal. 14','Precision-cut tree silhouette','Integrated LED lighting','Powder coat finish','Built-in drainage','Ships MX & USA'],
-    featuresEs:['Lámina galvanizada cal. 14','Corte de precisión árbol','Iluminación LED integrada','Pintura electrostática','Desagüe incluido','Envío MX y USA'],
+    name:'Árbol — Illuminated Planter', nameEs:'Árbol — Maceta Retroiluminada',
+    cat:'Garden & Terrace', catEs:'Jardín & Terraza',
+    desc:'Galvanized steel cal. 14 with a precision-cut tree silhouette. Integrated LED lighting, electrostatic powder coat finish and built-in drainage. Made to your exact measurements.',
+    descEs:'Lámina galvanizada cal. 14 con silueta de árbol cortada a precisión. Iluminación LED integrada, pintura electrostática y desagüe. Fabricada a la medida exacta de tu espacio.',
+    features:['Galvanized steel cal. 14','Precision-cut tree silhouette','Integrated LED lighting','Powder coat finish','Built-in drainage','Ships to MX & USA'],
+    featuresEs:['Lámina galvanizada cal. 14','Silueta árbol de precisión','Iluminación LED integrada','Pintura electrostática','Desagüe integrado','Envío a MX y USA'],
     sizes:[
-      {label:'S — 40×30 cm', labelEs:'S — 40×30 cm', price:3800, priceUSD:190},
-      {label:'M — 60×40 cm', labelEs:'M — 60×40 cm', price:5200, priceUSD:260},
-      {label:'L — 80×50 cm', labelEs:'L — 80×50 cm', price:7400, priceUSD:370},
+      {label:'S — 40×30 cm',labelEs:'S — 40×30 cm',price:3800,priceUSD:190},
+      {label:'M — 60×40 cm',labelEs:'M — 60×40 cm',price:5200,priceUSD:260},
+      {label:'L — 80×50 cm',labelEs:'L — 80×50 cm',price:6800,priceUSD:340},
+      {label:'XL — 100×60 cm',labelEs:'XL — 100×60 cm',price:8500,priceUSD:425},
     ]
   },
-  {
-    id:2, name:'Iron Gate — Self-Install Door', nameEs:'Iron Gate — Puerta Autoinstalable',
-    cat:'Doors', catEs:'Puertas',
-    badge:'Coming soon', badgeEs:'Próximamente',
+  {id:2,comingSoon:false,
     imgUrl:'https://ltveorvqvvlyivjwxjlc.supabase.co/storage/v1/object/public/arqen/nano-banana-2_Product_photography_premium_steel_security_door_full_panel_CNC_laser_cut_organic-0.jpg',
-    desc:'Steel with Laser cut designs. Frame, hardware and installation guide included. Multiple designs. Ships anywhere in Mexico and the US.',
+    name:'Iron Gate — Self-Install Door', nameEs:'Puerta de Acero — Autoinstalable',
+    cat:'Doors', catEs:'Puertas',
+    desc:'Steel with precision-cut designs. Frame, hardware and installation guide included. Multiple designs available. Ships anywhere in Mexico and the US.',
     descEs:'Acero con diseños únicos cortados a precisión. Marco, herrajes y guía de instalación incluidos. Múltiples diseños. Envío a México y USA.',
-    features:['Precision cut','Frame & hardware included','Self-install guide','Powder coat finish','Multiple designs','Ships MX & USA'],
-    featuresEs:['Corte de precisión de precisión','Marco y herrajes incluidos','Guía de instalación','Pintura electrostática','Múltiples diseños','Envío MX y USA'],
-    sizes:[
-      {label:'Standard — 90×210 cm', labelEs:'Estándar — 90×210 cm', price:18500, priceUSD:925},
-      {label:'Wide — 100×210 cm', labelEs:'Amplia — 100×210 cm', price:22000, priceUSD:1100},
-      {label:'Double — 180×210 cm', labelEs:'Doble — 180×210 cm', price:38000, priceUSD:1900},
-    ],
-    comingSoon: true
+    features:['High-performance steel','Precision cut design','Self-install with guide','Multiple designs','Matte black or custom finish','Ships to MX & USA'],
+    featuresEs:['Acero de alto desempeño','Diseño cortado a precisión','Autoinstalable con guía','Múltiples diseños','Negro mate o acabado personalizado','Envío a MX y USA'],
+    sizes:[{label:'60×200 cm',labelEs:'60×200 cm',price:8900,priceUSD:445},{label:'80×200 cm',labelEs:'80×200 cm',price:11500,priceUSD:575},{label:'90×200 cm',labelEs:'90×200 cm',price:13800,priceUSD:690},{label:'100×210 cm',labelEs:'100×210 cm',price:15900,priceUSD:795}]
   }
 ];
 
-let cart=[];
-let currency = 'MXN'; // MXN or USD
-let selectedSizes = {}; // productId -> sizeIndex
+let cart=[],currentLang='es',selectedSizes={};
+const currency='MXN';
 
-const fmt = (p, pUSD) => {
-  if(currency === 'USD') return '$' + (pUSD || Math.round(p/20)).toLocaleString('en-US');
-  return '$' + p.toLocaleString('es-MX') + ' MXN';
-};
+const fmt=(p,usd)=>p>0?`${p.toLocaleString('es-MX')} MXN`:'—';
 
 function updateUI(){
   const n=cart.reduce((a,i)=>a+i.qty,0);
-  const t=cart.reduce((a,i)=>a+(i.selectedSize?i.selectedSize.price:0)*i.qty,0);
+  const total=cart.reduce((a,i)=>a+i.price*i.qty,0);
   document.getElementById('nBadge').textContent=n;
-  document.getElementById('cCount').textContent=n+' item'+(n!==1?'s':'');
-  document.getElementById('cTotal').textContent=t>0?fmt(t,Math.round(t/20)):'—';
+  const isEs=currentLang==='es';
+  document.getElementById('cCount').textContent=n+(isEs?` artículo${n!==1?'s':''}`:(` item${n!==1?'s':''}`));
+  document.getElementById('cTotal').textContent=total>0?fmt(total):'—';
   document.getElementById('cBtn').disabled=!cart.length;
   const b=document.getElementById('cBody');
-  if(!cart.length){b.innerHTML='<div class="cart-empty">Your cart is empty</div>';return;}
+  if(!cart.length){b.innerHTML=`<div class="cart-empty">${isEs?'Tu carrito está vacío':'Your cart is empty'}</div>`;return;}
   b.innerHTML=cart.map(i=>`<div class="cart-item">
     <div class="cart-item-img"><img src="${i.imgUrl}" alt="${i.name}"></div>
     <div class="cart-item-info">
-      <div class="cart-item-name">${currentLang==='es'?i.nameEs:i.name}</div>
-      <div class="cart-item-size" style="font-size:10px;color:var(--light);margin-bottom:2px;">${currentLang==='es'?i.selectedSize.labelEs:i.selectedSize.label}</div>
-      <div class="cart-item-price">${fmt(i.selectedSize.price, i.selectedSize.priceUSD)}</div>
+      <div class="cart-item-name">${isEs?i.nameEs:i.name} — ${i.sizeLabel}</div>
+      <div class="cart-item-price">${fmt(i.price)}</div>
       <div class="cart-item-qty">
-        <button class="qty-btn" onclick="cq('${i.cartKey}',-1)">−</button>
+        <button class="qty-btn" onclick="cq(${i.uid},-1)">−</button>
         <span class="qty-val">${i.qty}</span>
-        <button class="qty-btn" onclick="cq('${i.cartKey}',1)">+</button>
-        <button class="qty-rm" onclick="rm('${i.cartKey}')">✕</button>
+        <button class="qty-btn" onclick="cq(${i.uid},1)">+</button>
+        <button class="qty-rm" onclick="rm(${i.uid})">✕</button>
       </div>
     </div>
   </div>`).join('');
 }
 
-function cq(key,d){const i=cart.find(x=>x.cartKey===key);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.cartKey!==key);updateUI();}
-function rm(key){cart=cart.filter(i=>i.cartKey!==key);updateUI();}
-function addCart(id){
-  const p=products.find(x=>x.id===id);
-  const sizeIdx = selectedSizes[id] || 0;
-  const size = p.sizes[sizeIdx];
-  const cartKey = id + '_' + sizeIdx;
-  const e = cart.find(x=>x.cartKey===cartKey);
-  if(e){ e.qty++; }
-  else {
-    cart.push({
-      ...p,
-      qty:1,
-      cartKey,
-      selectedSize: size,
-      sizeIdx
-    });
-  }
-  updateUI();
-  closeModal();
-  openCart();
+let uidCounter=0;
+function cq(uid,d){const i=cart.find(x=>x.uid===uid);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.uid!==uid);updateUI();}
+function rm(uid){cart=cart.filter(i=>i.uid!==uid);updateUI();}
+function addCart(productId){
+  const p=products.find(x=>x.id===productId);
+  const si=selectedSizes[productId]||0;
+  const sz=p.sizes[si];
+  const isEs=currentLang==='es';
+  cart.push({uid:++uidCounter,id:productId,name:p.name,nameEs:p.nameEs,imgUrl:p.imgUrl,price:sz.price,sizeLabel:isEs?sz.labelEs:sz.label,qty:1});
+  updateUI();closeModal();openCart();
 }
-function checkoutWA(){
+function checkoutContact(){
   if(!cart.length)return;
-  const txt='¡Hola! Quiero ordenar:\n\n'+cart.map(i=>`• ${i.name} (x${i.qty})`).join('\n')+'\n\n¿Cuáles son las medidas disponibles y precio?';
+  const isEs=currentLang==='es';
+  const txt=isEs
+    ?'¡Hola! Quiero ordenar:\n\n'+cart.map(i=>`• ${i.nameEs} — ${i.sizeLabel} (x${i.qty})`).join('\n')
+    :'Hi! I want to order:\n\n'+cart.map(i=>`• ${i.name} — ${i.sizeLabel} (x${i.qty})`).join('\n');
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`,'_blank');
 }
+
+function selectSize(pid,idx){
+  selectedSizes[pid]=idx;
+  const p=products.find(x=>x.id===pid);
+  const isEs=currentLang==='es';
+  const sz=p.sizes[idx];
+  document.getElementById('mPrice').textContent=sz.price>0?fmt(sz.price):'—';
+  document.querySelectorAll('#mSizes button').forEach((b,i)=>{
+    b.style.background=i===idx?'var(--ink)':'transparent';
+    b.style.color=i===idx?'white':'var(--mid)';
+    b.style.borderColor=i===idx?'var(--ink)':'rgba(0,0,0,.14)';
+  });
+}
+
 function openModal(id){
   const p=products.find(x=>x.id===id);
-  const lang = currentLang || 'en';
-  const isEs = lang === 'es';
-  document.getElementById('mCat').textContent = isEs ? p.catEs : p.cat;
-  document.getElementById('mName').textContent = '';
-  document.getElementById('mName').innerHTML = isEs ? p.nameEs : p.name;
-  document.getElementById('mDesc').textContent = isEs ? p.descEs : p.desc;
-  document.getElementById('mFeats').innerHTML = (isEs ? p.featuresEs : p.features).map(f=>`<li>${f}</li>`).join('');
-  document.getElementById('mPhoto').innerHTML=`<img src="${p.imgUrl}" alt="${p.name}" style="border-radius:24px 0 0 24px;width:100%;height:100%;object-fit:cover;">`;
+  const isEs=currentLang==='es';
+  document.getElementById('mCat').textContent=isEs?p.catEs:p.cat;
+  document.getElementById('mName').innerHTML=isEs?p.nameEs:p.name;
+  document.getElementById('mDesc').textContent=isEs?p.descEs:p.desc;
+  document.getElementById('mPhoto').innerHTML=`<img src="${p.imgUrl}" alt="${isEs?p.nameEs:p.name}" style="border-radius:24px 0 0 24px;width:100%;height:100%;object-fit:cover;">`;
+  document.getElementById('mSpecsTitle').textContent=isEs?'Especificaciones':'Specifications';
+  document.getElementById('mShip').innerHTML=`<strong>${isEs?'Envío':'Shipping'}:</strong> ${isEs?'México y Estados Unidos':'Mexico & United States'}`;
+  document.getElementById('mFeats').innerHTML=(isEs?p.featuresEs:p.features).map(f=>`<li>${f}</li>`).join('');
 
-  // Size selector
-  const sizeIdx = selectedSizes[id] || 0;
-  const selectedSize = p.sizes[sizeIdx];
-  const priceStr = p.comingSoon ? (isEs ? 'Próximamente' : 'Coming soon') : fmt(selectedSize.price, selectedSize.priceUSD);
+  const si=selectedSizes[id]||0;
+  const sz=p.sizes[si];
+  document.getElementById('mPrice').textContent=p.comingSoon?(isEs?'Próximamente':'Coming soon'):(sz.price>0?fmt(sz.price):'—');
+  document.getElementById('mPnote').textContent=p.comingSoon
+    ?(isEs?'Disponible pronto':'Available soon')
+    :(isEs?'Precio en MXN · Consultar USD':'Price in MXN · Ask for USD');
 
-  document.getElementById('mPrice').textContent = priceStr;
-  document.getElementById('mPnote').textContent = p.comingSoon
-    ? (isEs ? 'Disponible pronto · Déjanos tu email' : 'Available soon · Leave your email')
-    : (isEs ? 'Envío a México incluido · USD para pedidos USA' : 'MX shipping included · USD for US orders');
-
-  // Build size selector
-  const sizesHtml = `
-    <div style="margin-bottom:var(--sp-4);">
-      <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);margin-bottom:var(--sp-3);">
-        ${isEs ? 'Medida' : 'Size'}
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);">
-        ${p.sizes.map((s,i) => `
-          <button onclick="selectSize(${id},${i})" style="
-            padding:8px 16px;border-radius:8px;font-size:10px;font-weight:700;
-            letter-spacing:0.08em;font-family:'Montserrat',sans-serif;cursor:pointer;
-            transition:all 0.18s;
-            ${i===sizeIdx
-              ? 'background:var(--ink);color:white;border:1.5px solid var(--ink);'
-              : 'background:transparent;color:var(--mid);border:1.5px solid rgba(0,0,0,0.14);'}
-          ">${isEs ? s.labelEs : s.label}</button>
-        `).join('')}
-      </div>
-    </div>
-  `;
-  document.getElementById('mSizes').innerHTML = sizesHtml;
-
-  // Buttons
-  if(p.comingSoon){
-    document.getElementById('mAdd').style.display='none';
-    document.getElementById('mNotify').style.display='block';
-    document.getElementById('mNotify').textContent = isEs ? 'Notificarme cuando esté disponible →' : 'Notify me when available →';
+  if(!p.comingSoon){
+    document.getElementById('mSizes').innerHTML=`
+      <div style="margin-bottom:var(--sp-4);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:var(--sp-3);">${isEs?'Medida':'Size'}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);">${p.sizes.map((s,i)=>`
+          <button onclick="selectSize(${id},${i})" style="padding:8px 16px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:.08em;font-family:'Montserrat',sans-serif;cursor:pointer;transition:all .18s;background:${i===si?'var(--ink)':'transparent'};color:${i===si?'white':'var(--mid)'};border:1.5px solid ${i===si?'var(--ink)':'rgba(0,0,0,.14)'}">${isEs?s.labelEs:s.label}</button>
+        `).join('')}</div>
+      </div>`;
   } else {
-    document.getElementById('mAdd').style.display='block';
-    document.getElementById('mNotify').style.display='none';
-    document.getElementById('mAdd').textContent = isEs ? 'Agregar al carrito' : 'Add to cart';
-    document.getElementById('mAdd').onclick=()=>addCart(p.id);
+    document.getElementById('mSizes').innerHTML='';
   }
+
+  const mAdd=document.getElementById('mAdd');
+  const mNotify=document.getElementById('mNotify');
+  const mContact=document.getElementById('mContact');
+  if(p.comingSoon){
+    mAdd.style.display='none';
+    mNotify.style.display='block';
+    mNotify.textContent=isEs?'Notificarme cuando esté disponible →':'Notify me when available →';
+  } else {
+    mAdd.style.display='block';
+    mNotify.style.display='none';
+    mAdd.textContent=isEs?'Agregar al carrito':'Add to cart';
+    mAdd.onclick=()=>addCart(id);
+  }
+  mContact.textContent=isEs?'Contactar →':'Contact us →';
+  mContact.href=`https://wa.me/${WA}?text=${encodeURIComponent(isEs?'Hola! Me interesa: '+p.nameEs:'Hi, I am interested in: '+p.name)}`;
 
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
 }
 
-
-function closeModal(){
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow='';
-}
-function openCart(){
-  document.getElementById('cDrawer').classList.add('open');
-  document.getElementById('cOv').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-document.getElementById('modal').addEventListener('click', function(e){
-  if(e.target === this) closeModal();
-});
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape') { closeModal(); closeCart(); }
-});
-
-function selectSize(productId, sizeIdx){
-  selectedSizes[productId] = sizeIdx;
-  openModal(productId); // re-render
-}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function openCart(){document.getElementById('cDrawer').classList.add('open');document.getElementById('cOv').classList.add('open');document.body.style.overflow='hidden';}
 function closeCart(){document.getElementById('cDrawer').classList.remove('open');document.getElementById('cOv').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCart();}});
 
-const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:0.07});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:.07});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 function toggleNav(){
-  const l=document.getElementById('navLinks');
-  const h=document.getElementById('nHam');
-  l.classList.toggle('open');
-  h.classList.toggle('open');
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('nHam').classList.toggle('open');
 }
 document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click',()=>{
   document.getElementById('navLinks').classList.remove('open');
   document.getElementById('nHam').classList.remove('open');
 }));
-updateUI();
 </script>
 
 <script>
-// ── I18N ──
-const i18n = {
-  en: {
-    // Announce
-    ann1: "Ships to Mexico, USA & internationally",
-    ann2: "Direct delivery to your door",
-    ann3: "Handcrafted in Mexico",
-    ann4: "Precision design",
-    ann5: "Premium steel",
-    ann6: "Planters · Doors · Gates",
-    // Nav
-    nav1: "Products", nav2: "Gallery", nav3: "How it works", nav4: "Contact",
-    navBtn: "Shop now →", navCart: "Cart",
-    // Hero
-    heroTag: "Ships to Mexico, USA & beyond",
-    heroH1: "Steel objects.<br><em>Designed to last.</em>",
-    heroSub: "Illuminated steel planters and self-install doors. Precision design, handcrafted in Mexico, delivered to your door.",
-    heroCta1: "Shop now", heroCta2: "Get in touch →",
-    heroM1v: "MX · US · CA", heroM1l: "We ship to",
-    heroM2v: "Handcrafted", heroM2l: "Made in Mexico",
-    heroM3v: "Precision craft", heroM3l: "Technology",
-    // Products section
-    prodEye: "Our products",
-    prodTitle: "Objects that transform <em>spaces</em>",
-    prodDesc: "Each piece made to order in our studio. Precision, premium materials, shipped directly to you.",
-    // Product 1
-    p1cat: "Garden & Terrace",
-    p1name: "Árbol<br>Illuminated Planter",
-    p1desc: "Galvanized steel cal. 14 with a precision-cut tree silhouette. Integrated LED lighting, electrostatic powder coat finish and drainage. Made to your exact measurements.",
-    p1price: "Choose your size →",
-    p1cta: "View details →",
-    p1f1: "Galvanized steel", p1f2: "LED included", p1f3: "Laser cut", p1f4: "Ships MX & USA",
-    // Product 2
-    p2cat: "Doors",
-    p2name: "Iron Gate<br>Self-Install Door",
-    p2desc: "Steel with Laser cut designs. Frame, hardware and installation guide included. Multiple designs available. Ships anywhere in Mexico and the US.",
-    p2price: "Coming soon",
-    p2cta: "View details →",
-    p2f1: "Self-install", p2f2: "Frame included", p2f3: "Laser cut", p2f4: "Ships MX & USA",
-    // Perks
-    pk1t: "Ships across MX, USA & beyond", pk1s: "Direct delivery to your door",
-    pk2t: "Handcrafted", pk2s: "Designed & made in our studio",
-    pk3t: "Made to order", pk3s: "Custom sizes & finishes available",
-    pk4t: "Response in 2 hours", pk4s: "We respond within 2 hours",
-    // Gallery doors
-    galEye: "In real spaces", galTitle: "Design you can <em>feel</em>",
-    // Gallery macetas
-    mac_eye: "In real spaces", mac_title: "Planters that <em>illuminate</em>",
-    // Process
-    procEye: "How it works", procTitle: "Choose, add, <em>receive</em>",
-    proc1t: "Choose your piece", proc1b: "Browse our products and select the design that fits your space. Custom sizes available.",
-    proc2t: "Add to cart", proc2b: "Select your size and finish. Pricing shown instantly — or contact us for custom dimensions.",
-    proc3t: "We ship to you", proc3b: "We build your piece to order and ship it directly to your address — anywhere in Mexico or the United States.",
-    // CTA
-    ctaEye: "Start today",
-    ctaTitle: "Ready to transform<br>your <em>space?</em>",
-    ctaBody: "",
-    ctaBtn: "Shop now →",
-    ctaM1: "Mexico", ctaM2: "United States", ctaM3: "International", 
-    ctaMl: "We ship here",
-    // Cart
-    cartTitle: "Your order", cartEmpty: "Your cart is empty",
-    cartTotalLbl: "Order total", cartBtn: "Order now →",
-    cartNote: "Need help?",
-    // Footer
-    ftDesc: "Steel design objects. Illuminated planters and self-install doors. We ship to Mexico, the US, and internationally.",
-    ftCol1: "Products", ftCol2: "About", ftCol3: "Contact",
-    ftP1: "Planters", ftP2: "Self-install Doors",
-    ftA1: "How it works", ftA2: "Gallery", ftA3: "Custom projects →",
-    ftMeta: "By MetalMad",
-    ftMetaDesc: "Premium steel fabrication studio based in Sinaloa, Mexico. 25+ years crafting bespoke architectural metalwork.",
-
-    
-    gt1c:"Doors", gt1n:"Árbol Entrance",
-    gt2c:"Doors", gt2n:"Night Facade",
-    gt3c:"Planters", gt3n:"Árbol Illuminated",
-    gt4c:"Planters", gt4n:"Árbol Detail",
-    gt5c:"Doors", gt5n:"Dusk Facade",
-    gt6c:"Doors", gt6n:"Geometric Gate",
-    gt7c:"Planters", gt7n:"Lifestyle",
-    gt8c:"Planters", gt8n:"LED Night",
-    mmEye: "Crafted by",
-    mmDesc: "Premium steel fabrication studio based in Sinaloa, Mexico. Over 25 years crafting bespoke architectural metalwork — from custom doors and staircases to full residential and commercial projects.",
-    mmLink: "Custom projects → metalmad.mx",
-    mm1t: "Custom design & fabrication", mm1b: "Doors, gates, staircases, railings — designed and built to spec.",
-    mm2t: "25+ years of experience", mm2b: "Trusted by architects, builders and homeowners across Mexico.",
-    mm3t: "Based in Sinaloa, Mexico", mm3b: "On-site installation in Sinaloa. Nationwide & international shipping.",
-    ftCopy1: "© 2026 ARQEN — Architectural Objects. All rights reserved.",
-    ftCopy2: "Steel design, made in Mexico.",
+const i18n={
+  es:{
+    ann1:'Envíos a México, USA e internacional',ann2:'Entrega directa a tu puerta',ann3:'Fabricación propia en México',ann4:'Diseño de precisión artesanal',ann5:'Acero premium',ann6:'Macetas · Puertas · Portones',
+    navL1:'Productos',navL2:'Galería',navL3:'Cómo funciona',navL4:'Contacto',navBtn:'Comprar →',navCart:'Carrito',
+    heroTag:'Envíos a México, USA y más',heroH1:'Objetos de acero.<br><em>Diseñados para durar.</em>',
+    heroSub:'Macetas retroiluminadas y puertas autoinstalables. Diseño de precisión, fabricación propia, entrega a tu puerta.',
+    heroCta1:'Ver productos',heroCta2:'Contáctanos →',
+    heroM1v:'MX · US · CA',heroM1l:'Enviamos a',heroM2v:'Fabricación propia',heroM2l:'Hecho en México',heroM3v:'Hecho a mano',heroM3l:'Artesanía',
+    prodEye:'Nuestros productos',prodTitle:'Objetos que transforman <em>espacios</em>',
+    p1badge:'Pieza estrella',p1cat:'Jardín & Terraza',p1name:'Árbol<br>Maceta Retroiluminada',p1desc:'Lámina galvanizada cal. 14 con silueta de árbol cortada a precisión. Iluminación LED integrada, pintura electrostática y desagüe. Fabricada a la medida exacta de tu espacio.',p1price:'Elige tu medida →',p1cta:'Ver detalles →',p1f1:'Acero galvanizado',p1f2:'LED incluido',p1f3:'Corte de precisión',p1f4:'Envío MX y USA',
+    p2badge:'Nuevo',p2cat:'Puertas',p2name:'Puerta de Acero<br>Autoinstalable',p2desc:'Acero con diseños únicos cortados a precisión. Marco, herrajes y guía de instalación incluidos. Múltiples diseños. Envío a México y USA.',p2price:'Elige tu medida →',p2cta:'Ver detalles →',p2f1:'Autoinstalable',p2f2:'Marco incluido',p2f3:'Corte de precisión',p2f4:'Envío MX y USA',
+    pk1t:'Envíos a todo México y USA',pk1s:'Entrega directa a tu puerta',pk2t:'Fabricación propia',pk2s:'Diseño y manufactura en taller',pk3t:'A tu medida',pk3s:'Medidas y acabados personalizados',pk4t:'Respuesta en 2 horas',pk4s:'Respondemos en menos de 2 horas',
+    galEye:'En espacios reales',galTitle:'Diseño que se <em>vive</em>',
+    gt1c:'Puertas',gt1n:'Entrada Árbol',gt2c:'Puertas',gt2n:'Fachada Nocturna',gt3c:'Macetas',gt3n:'Árbol Iluminada',gt4c:'Macetas',gt4n:'Árbol Detalle',gt5c:'Puertas',gt5n:'Fachada Crepúsculo',gt6c:'Puertas',gt6n:'Geométrico',gt7c:'Macetas',gt7n:'Lifestyle',gt8c:'Macetas',gt8n:'LED Noche',
+    procEye:'Así de simple',procTitle:'Elige, agrega, <em>recibe</em>',proc1t:'Elige tu pieza',proc1b:'Explora nuestros productos y elige el diseño que va con tu espacio. Medidas personalizadas disponibles.',proc2t:'Agrega al carrito',proc2b:'Selecciona tu medida y acabado. El precio se muestra al instante.',proc3t:'Te la enviamos',proc3b:'Fabricamos tu pieza y la enviamos directamente a tu puerta — a cualquier parte de México o Estados Unidos.',
+    mmEye:'Fabricado por',mmDesc:'Taller de herrería premium en Sinaloa, México. Más de 25 años fabricando metalwork arquitectónico a la medida — desde puertas y escaleras hasta proyectos residenciales y comerciales completos.',mmLink:'Proyectos a medida → metalmad.mx',mm1t:'Diseño y fabricación a la medida',mm1b:'Puertas, portones, escaleras, barandales — diseñados y fabricados a tu especificación.',mm2t:'25+ años de experiencia',mm2b:'Elegidos por arquitectos, constructoras y clientes en todo México.',mm3t:'Basados en Sinaloa, México',mm3b:'Instalación en Sinaloa incluida. Envíos nacionales e internacionales.',
+    ctaEye:'Empieza hoy',ctaTitle:'¿Listo para transformar<br>tu <em>espacio?</em>',ctaBtn:'Ver productos →',ctaBtn2:'Contáctanos',ctaM1:'México',ctaM2:'Estados Unidos',ctaM3:'Internacional',ctaMl:'Enviamos',
+    cartTitle:'Tu pedido',cartTotalLbl:'Total',cartBtn:'Ordenar ahora →',cartNote:'¿Necesitas ayuda?',
+    ftDesc:'Objetos de diseño en acero. Macetas retroiluminadas y puertas autoinstalables. Enviamos a todo México, USA e internacionalmente.',ftCol1:'Productos',ftCol2:'Información',ftCol3:'Contacto',ftP1:'Macetas Iluminadas',ftP2:'Puertas Autoinstalables',ftA1:'Cómo funciona',ftA2:'Galería',ftA3:'MetalMad → metalmad.mx',ftCopy1:'© 2026 ARQEN — Architectural Objects. Todos los derechos reservados.',ftCopy2:'Diseño en acero, hecho en México.',
   },
-  es: {
-    ann1: "Envíos a México, USA e internacional",
-    ann2: "Entrega directa a tu puerta",
-    ann3: "Fabricación propia en México",
-    ann4: "Diseño de precisión artesanal",
-    ann5: "Acero premium",
-    ann6: "Macetas · Puertas · Portones",
-    nav1: "Productos", nav2: "Galería", nav3: "Cómo funciona", nav4: "Contacto",
-    navBtn: "Comprar →", navCart: "Carrito",
-    heroTag: "Envíos a México, USA y más",
-    heroH1: "Objetos de acero.<br><em>Diseñados para durar.</em>",
-    heroSub: "Macetas retroiluminadas y puertas autoinstalables. Diseño de precisión, fabricación propia, entrega a tu puerta.",
-    heroCta1: "Ver productos", heroCta2: "Contáctanos →",
-    heroM1v: "MX · US · CA", heroM1l: "Enviamos a",
-    heroM2v: "Fabricación propia", heroM2l: "Hecho en México",
-    heroM3v: "Hecho a mano", heroM3l: "Artesanía",
-    prodEye: "Nuestros productos",
-    prodTitle: "Objetos que transforman <em>espacios</em>",
-    prodDesc: "",
-    p1cat: "Jardín & Terraza",
-    p1name: "Árbol<br>Maceta Retroiluminada",
-    p1desc: "Lámina galvanizada cal. 14 con silueta de árbol cortada a precisión. Iluminación LED integrada, pintura electrostática y desagüe. Fabricada a la medida exacta de tu espacio.",
-    p1price: "Elige tu medida →",
-    p1cta: "Ver detalles →",
-    p1f1: "Acero galvanizado", p1f2: "LED incluido", p1f3: "Corte de precisión", p1f4: "Envío MX y USA",
-    p2cat: "Puertas",
-    p2name: "Puerta de Acero<br>Autoinstalable",
-    p2desc: "Acero con diseños únicos cortados a precisión. Marco, herrajes y guía de instalación incluidos. Múltiples diseños. Envío a México y USA.",
-    p2price: "Próximamente",
-    p2cta: "Ver detalles →",
-    p2f1: "Autoinstalable", p2f2: "Marco incluido", p2f3: "Corte de precisión", p2f4: "Envío MX y USA",
-    pk1t: "Envíos a todo México y USA", pk1s: "Entrega directa a tu puerta",
-    pk2t: "Fabricación propia", pk2s: "Diseño y manufactura en taller",
-    pk3t: "A tu medida", pk3s: "Medidas y acabados personalizados",
-    pk4t: "Respuesta en 2 horas", pk4s: "Respondemos en menos de 2 horas",
-    galEye: "En espacios reales", galTitle: "Diseño que se <em>vive</em>",
-    mac_eye: "En espacios reales", mac_title: "Macetas que <em>iluminan</em>",
-    procEye: "Así de simple", procTitle: "Elige, agrega, <em>recibe</em>",
-    proc1t: "Elige tu pieza", proc1b: "Explora nuestros productos y elige el diseño que va con tu espacio. Medidas personalizadas disponibles.",
-    proc2t: "Agrega al carrito", proc2b: "Selecciona tu medida y acabado. El precio se muestra al instante — o contáctanos si necesitas medidas personalizadas.",
-    proc3t: "Te la enviamos", proc3b: "Fabricamos tu pieza bajo pedido y la enviamos directamente a tu dirección — a cualquier parte de México o Estados Unidos.",
-    ctaEye: "Empieza hoy",
-    ctaTitle: "¿Listo para transformar<br>tu <em>espacio?</em>",
-    ctaBody: "Elige tu pieza, elige tu medida. Precio visible al instante.",
-    ctaBtn: "Ver productos →",
-    ctaM1: "México", ctaM2: "Estados Unidos", ctaM3: "Internacional", 
-    ctaMl: "Enviamos",
-    cartTitle: "Tu pedido", cartEmpty: "Tu carrito está vacío",
-    cartTotalLbl: "Total del pedido", cartBtn: "Ordenar ahora →",
-    cartNote: "¿Necesitas ayuda?",
-    ftDesc: "Objetos de diseño en acero. Macetas retroiluminadas y puertas autoinstalables. Enviamos a todo México, USA e internacionalmente.",
-    ftCol1: "Productos", ftCol2: "Información", ftCol3: "Contacto",
-    ftP1: "Macetas Iluminadas", ftP2: "Puertas Autoinstalables",
-    ftA1: "Cómo funciona", ftA2: "Galería", ftA3: "Proyectos a medida →",
-    ftMeta: "Por MetalMad",
-    ftMetaDesc: "Taller de herrería premium en Sinaloa, México. 25+ años fabricando metalwork arquitectónico a la medida.",
-
-    
-    gt1c:"Puertas", gt1n:"Entrada Árbol",
-    gt2c:"Puertas", gt2n:"Fachada Nocturna",
-    gt3c:"Macetas", gt3n:"Árbol Iluminada",
-    gt4c:"Macetas", gt4n:"Árbol Detalle",
-    gt5c:"Puertas", gt5n:"Fachada Crepúsculo",
-    gt6c:"Puertas", gt6n:"Geométrico",
-    gt7c:"Macetas", gt7n:"Lifestyle",
-    gt8c:"Macetas", gt8n:"LED Noche",
-    mmEye: "Fabricado por",
-    mmDesc: "Taller de herrería premium en Sinaloa, México. Más de 25 años fabricando metalwork arquitectónico a la medida — desde puertas y escaleras hasta proyectos residenciales y comerciales completos.",
-    mmLink: "Proyectos a medida → metalmad.mx",
-    mm1t: "Diseño y fabricación a la medida", mm1b: "Puertas, portones, escaleras, barandales — diseñados y fabricados a tu especificación.",
-    mm2t: "25+ años de experiencia", mm2b: "Elegidos por arquitectos, constructoras y clientes en todo México.",
-    mm3t: "Basados en Sinaloa, México", mm3b: "Instalación en Sinaloa incluida. Envíos nacionales e internacionales.",
-    ftCopy1: "© 2026 ARQEN — Architectural Objects. Todos los derechos reservados.",
-    ftCopy2: "Diseño en acero, hecho en México.",
+  en:{
+    ann1:'Ships to Mexico, USA & internationally',ann2:'Direct delivery to your door',ann3:'Handcrafted in Mexico',ann4:'Precision design',ann5:'Premium steel',ann6:'Planters · Doors · Gates',
+    navL1:'Products',navL2:'Gallery',navL3:'How it works',navL4:'Contact',navBtn:'Shop now →',navCart:'Cart',
+    heroTag:'Ships to Mexico, USA & beyond',heroH1:'Steel objects.<br><em>Designed to last.</em>',
+    heroSub:'Illuminated steel planters and self-install doors. Precision design, handcrafted in Mexico, delivered to your door.',
+    heroCta1:'Shop now',heroCta2:'Get in touch →',
+    heroM1v:'MX · US · CA',heroM1l:'We ship to',heroM2v:'Handcrafted',heroM2l:'Made in Mexico',heroM3v:'Precision craft',heroM3l:'Artisanship',
+    prodEye:'Our products',prodTitle:'Objects that transform <em>spaces</em>',
+    p1badge:'Best seller',p1cat:'Garden & Terrace',p1name:'Árbol<br>Illuminated Planter',p1desc:'Galvanized steel cal. 14 with a precision-cut tree silhouette. Integrated LED lighting, powder coat finish and built-in drainage. Made to your exact measurements.',p1price:'Choose your size →',p1cta:'View details →',p1f1:'Galvanized steel',p1f2:'LED included',p1f3:'Precision cut',p1f4:'Ships MX & USA',
+    p2badge:'New',p2cat:'Doors',p2name:'Iron Gate<br>Self-Install Door',p2desc:'Steel with precision-cut designs. Frame, hardware and installation guide included. Multiple designs available. Ships anywhere in Mexico and the US.',p2price:'Choose your size →',p2cta:'View details →',p2f1:'Self-install',p2f2:'Frame included',p2f3:'Precision cut',p2f4:'Ships MX & USA',
+    pk1t:'Ships across MX, USA & beyond',pk1s:'Direct delivery to your door',pk2t:'Handcrafted',pk2s:'Designed & made in our studio',pk3t:'Made to order',pk3s:'Custom sizes & finishes available',pk4t:'Response in 2 hours',pk4s:'We respond within 2 hours',
+    galEye:'In real spaces',galTitle:'Design you can <em>feel</em>',
+    gt1c:'Doors',gt1n:'Tree Entrance',gt2c:'Doors',gt2n:'Night Facade',gt3c:'Planters',gt3n:'Árbol Backlit',gt4c:'Planters',gt4n:'Árbol Detail',gt5c:'Doors',gt5n:'Dusk Facade',gt6c:'Doors',gt6n:'Geometric',gt7c:'Planters',gt7n:'Lifestyle',gt8c:'Planters',gt8n:'LED Night',
+    procEye:'How it works',procTitle:'Choose, add, <em>receive</em>',proc1t:'Choose your piece',proc1b:'Browse our products and select the design that fits your space. Custom sizes available.',proc2t:'Add to cart',proc2b:'Select your size and finish. Pricing shown instantly.',proc3t:'We ship to you',proc3b:'We build your piece and ship it directly to your address — anywhere in Mexico or the United States.',
+    mmEye:'Crafted by',mmDesc:'Premium steel fabrication studio based in Sinaloa, Mexico. Over 25 years crafting bespoke architectural metalwork — from custom doors and staircases to full residential and commercial projects.',mmLink:'Custom projects → metalmad.mx',mm1t:'Custom design & fabrication',mm1b:'Doors, gates, staircases, railings — designed and built to spec.',mm2t:'25+ years of experience',mm2b:'Trusted by architects, builders and homeowners across Mexico.',mm3t:'Based in Sinaloa, Mexico',mm3b:'On-site installation in Sinaloa. Nationwide & international shipping.',
+    ctaEye:'Start today',ctaTitle:'Ready to transform<br>your <em>space?</em>',ctaBtn:'Shop now →',ctaBtn2:'Get in touch',ctaM1:'Mexico',ctaM2:'United States',ctaM3:'International',ctaMl:'We ship',
+    cartTitle:'Your order',cartTotalLbl:'Order total',cartBtn:'Order now →',cartNote:'Need help?',
+    ftDesc:'Steel design objects. Illuminated planters and self-install doors. We ship to Mexico, the US, and internationally.',ftCol1:'Products',ftCol2:'About',ftCol3:'Contact',ftP1:'Illuminated Planters',ftP2:'Self-install Doors',ftA1:'How it works',ftA2:'Gallery',ftA3:'MetalMad → metalmad.mx',ftCopy1:'© 2026 ARQEN — Architectural Objects. All rights reserved.',ftCopy2:'Steel design, made in Mexico.',
   }
 };
 
-let currentLang = 'es';
+function applyLang(lang){
+  const t=i18n[lang];
+  const st=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
+  const sh=(id,html)=>{const el=document.getElementById(id);if(el)el.innerHTML=html;};
 
-function applyLang(lang) {
-  const t = i18n[lang];
-  const s = (id, html) => { const el = document.getElementById(id); if(el) el.innerHTML = html; };
-  const st = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
-
-  // Announce
-  document.querySelectorAll('.ann-item').forEach((el,i) => {
-    const keys = ['ann1','ann2','ann3','ann4','ann5','ann6','ann1','ann2','ann3','ann4','ann5','ann6'];
-    el.innerHTML = t[keys[i]] + '<span style="opacity:0.3"> · </span>';
+  // Announce (first 6 items only)
+  document.querySelectorAll('.ann-item').forEach((el,i)=>{
+    const keys=['ann1','ann2','ann3','ann4','ann5','ann6'];
+    if(i<6)el.textContent=t[keys[i]];
   });
+
   // Nav
-  const navLinks = document.querySelectorAll('.nav-link');
-  ['nav1','nav2','nav3','nav4'].forEach((k,i) => { if(navLinks[i]) navLinks[i].textContent = t[k]; });
-  const btnNav = document.querySelector('.btn-nav'); if(btnNav) btnNav.textContent = t.navBtn;
-  const navCartBtn = document.querySelector('.nav-cart'); 
-  if(navCartBtn) navCartBtn.childNodes[0].textContent = t.navCart + ' ';
+  st('navL1',t.navL1);st('navL2',t.navL2);st('navL3',t.navL3);st('navL4',t.navL4);
+  st('navBtn',t.navBtn);st('navCart',t.navCart);
+
   // Hero
-  s('heroTag', '<span style="content:\'\';width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;margin-right:8px;"></span>' + t.heroTag);
-  s('heroH1', t.heroH1);
-  st('heroSub', t.heroSub);
-  st('heroCta1', t.heroCta1);
-  st('heroCta2', t.heroCta2);
-  st('heroM1v', t.heroM1v); st('heroM1l', t.heroM1l);
-  st('heroM2v', t.heroM2v); st('heroM2l', t.heroM2l);
-  st('heroM3v', t.heroM3v); st('heroM3l', t.heroM3l);
+  st('heroTag',t.heroTag);sh('heroH1',t.heroH1);st('heroSub',t.heroSub);
+  st('heroCta1',t.heroCta1);st('heroCta2',t.heroCta2);
+  st('heroM1v',t.heroM1v);st('heroM1l',t.heroM1l);
+  st('heroM2v',t.heroM2v);st('heroM2l',t.heroM2l);
+  st('heroM3v',t.heroM3v);st('heroM3l',t.heroM3l);
+
   // Products
-  st('prodEye', t.prodEye); s('prodTitle', t.prodTitle); st('prodDesc', t.prodDesc);
-  st('p1cat', t.p1cat); s('p1name', t.p1name); st('p1desc', t.p1desc);
-  st('p1price', t.p1price); st('p1cta', t.p1cta);
-  st('p1f1', t.p1f1); st('p1f2', t.p1f2); st('p1f3', t.p1f3); st('p1f4', t.p1f4);
-  st('p2cat', t.p2cat); s('p2name', t.p2name); st('p2desc', t.p2desc);
-  st('p2price', t.p2price); st('p2cta', t.p2cta);
-  st('p2f1', t.p2f1); st('p2f2', t.p2f2); st('p2f3', t.p2f3); st('p2f4', t.p2f4);
+  st('prodEye',t.prodEye);sh('prodTitle',t.prodTitle);
+  st('p1badge',t.p1badge);st('p1cat',t.p1cat);sh('p1name',t.p1name);
+  st('p1desc',t.p1desc);st('p1price',t.p1price);st('p1cta',t.p1cta);
+  st('p1f1',t.p1f1);st('p1f2',t.p1f2);st('p1f3',t.p1f3);st('p1f4',t.p1f4);
+  st('p2badge',t.p2badge);st('p2cat',t.p2cat);sh('p2name',t.p2name);
+  st('p2desc',t.p2desc);st('p2price',t.p2price);st('p2cta',t.p2cta);
+  st('p2f1',t.p2f1);st('p2f2',t.p2f2);st('p2f3',t.p2f3);st('p2f4',t.p2f4);
+
   // Perks
-  st('pk1t', t.pk1t); st('pk1s', t.pk1s);
-  st('pk2t', t.pk2t); st('pk2s', t.pk2s);
-  st('pk3t', t.pk3t); st('pk3s', t.pk3s);
-  st('pk4t', t.pk4t); st('pk4s', t.pk4s);
+  st('pk1t',t.pk1t);st('pk1s',t.pk1s);st('pk2t',t.pk2t);st('pk2s',t.pk2s);
+  st('pk3t',t.pk3t);st('pk3s',t.pk3s);st('pk4t',t.pk4t);st('pk4s',t.pk4s);
+
   // Gallery
-  st('galEye', t.galEye); s('galTitle', t.galTitle);
-  st('macEye', t.mac_eye); s('macTitle', t.mac_title);
+  st('galEye',t.galEye);sh('galTitle',t.galTitle);
+  for(let i=1;i<=8;i++){st(`gt${i}c`,t[`gt${i}c`]);st(`gt${i}n`,t[`gt${i}n`]);}
+
   // Process
-  st('procEye', t.procEye); s('procTitle', t.procTitle);
-  st('proc1t', t.proc1t); st('proc1b', t.proc1b);
-  st('proc2t', t.proc2t); st('proc2b', t.proc2b);
-  st('proc3t', t.proc3t); st('proc3b', t.proc3b);
+  st('procEye',t.procEye);sh('procTitle',t.procTitle);
+  st('proc1t',t.proc1t);st('proc1b',t.proc1b);
+  st('proc2t',t.proc2t);st('proc2b',t.proc2b);
+  st('proc3t',t.proc3t);st('proc3b',t.proc3b);
+
+  // MetalMad
+  st('mmEye',t.mmEye);st('mmDesc',t.mmDesc);st('mmLink',t.mmLink);
+  st('mm1t',t.mm1t);st('mm1b',t.mm1b);
+  st('mm2t',t.mm2t);st('mm2b',t.mm2b);
+  st('mm3t',t.mm3t);st('mm3b',t.mm3b);
+
   // CTA
-  st('ctaEye', t.ctaEye); s('ctaTitle', t.ctaTitle); st('ctaBody', t.ctaBody);
-  st('ctaBtn', t.ctaBtn);
-  st('ctaM1', t.ctaM1); st('ctaM2', t.ctaM2); st('ctaM3', t.ctaM3);
-  st('ctaM4', t.ctaM4); st('ctaM5', t.ctaM5);
-  // Markets
-  ['1','2','3'].forEach(n => {
-    const el = document.getElementById('ctaM'+n);
-    const lbl = document.getElementById('ctaMl'+n);
-    if(el) el.textContent = t['ctaM'+n] || '';
-  });
-  document.querySelectorAll('.cta-mkt-l').forEach(el => el.textContent = t.ctaMl || el.textContent);
+  st('ctaEye',t.ctaEye);sh('ctaTitle',t.ctaTitle);
+  st('ctaBtn',t.ctaBtn);st('ctaBtn2',t.ctaBtn2);
+  st('ctaM1',t.ctaM1);st('ctaM2',t.ctaM2);st('ctaM3',t.ctaM3);
+  document.querySelectorAll('.cta-mkt-l').forEach(el=>el.textContent=t.ctaMl);
+
   // Cart
-  st('cartTitle', t.cartTitle);
-  st('cartTotalLbl', t.cartTotalLbl);
-  document.getElementById('cBtn').textContent = t.cartBtn;
+  st('cartTitle',t.cartTitle);st('cartTotalLbl',t.cartTotalLbl);
+  document.getElementById('cBtn').textContent=t.cartBtn;
+
   // Footer
-  st('ftDesc', t.ftDesc);
-  st('ftCol1', t.ftCol1); st('ftCol2', t.ftCol2); st('ftCol3', t.ftCol3);
-  st('ftP1', t.ftP1); st('ftP2', t.ftP2);
-  st('ftA1', t.ftA1); st('ftA2', t.ftA2); st('ftA3', t.ftA3);
-  st('ftMeta', t.ftMeta); st('ftMetaDesc', t.ftMetaDesc);
+  st('ftDesc',t.ftDesc);st('ftCol1',t.ftCol1);st('ftCol2',t.ftCol2);st('ftCol3',t.ftCol3);
+  st('ftP1',t.ftP1);st('ftP2',t.ftP2);
+  st('ftA1',t.ftA1);st('ftA2',t.ftA2);st('ftA3',t.ftA3);
+  st('ftCopy1',t.ftCopy1);st('ftCopy2',t.ftCopy2);
 
-
-  for(let i=1;i<=8;i++){
-    st('gt'+i+'c', t['gt'+i+'c']);
-    st('gt'+i+'n', t['gt'+i+'n']);
-  }
-  st('mmEye', t.mmEye);
-  st('mmDesc', t.mmDesc);
-  st('mmLink', t.mmLink);
-  st('mm1t', t.mm1t); st('mm1b', t.mm1b);
-  st('mm2t', t.mm2t); st('mm2b', t.mm2b);
-  st('mm3t', t.mm3t); st('mm3b', t.mm3b);
-  st('ftCopy1', t.ftCopy1); st('ftCopy2', t.ftCopy2);
   // Lang button
-  document.getElementById('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
-  // html lang attr
-  document.documentElement.lang = lang;
-}
+  document.getElementById('langBtn').textContent=lang==='es'?'EN':'ES';
+  document.documentElement.lang=lang;
 
-function toggleCurrency() {
-  currency = currency === 'MXN' ? 'USD' : 'MXN';
-  document.getElementById('currBtn').textContent = currency === 'MXN' ? 'USD' : 'MXN';
+  // Update cart UI for language
   updateUI();
-  // Update product card prices
-  document.getElementById('p1price').textContent = currency === 'USD'
-    ? 'From $190 USD'
-    : 'From $3,800 MXN';
-  document.getElementById('p2price').textContent = currency === 'USD'
-    ? 'From $925 USD · Coming soon'
-    : 'From $18,500 MXN · Coming soon';
 }
 
-function toggleLang() {
-  currentLang = currentLang === 'en' ? 'es' : 'en';
+function toggleLang(){
+  currentLang=currentLang==='es'?'en':'es';
   applyLang(currentLang);
 }
 
-// Override updateUI to respect lang
-const _origUpdateUI = updateUI;
-// Will be called after updateUI is defined
-window.addEventListener('DOMContentLoaded', () => {
-  applyLang('es');
-});
+window.addEventListener('DOMContentLoaded',()=>applyLang('es'));
 </script>
 </body>
 </html>
